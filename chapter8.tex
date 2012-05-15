@@ -1,5 +1,6 @@
 %\documentclass[CJK]{beamer}  
 
+
 \usepackage{fontspec,xunicode,xltxtra,beamerthemesplit,listings}
 
 \usepackage{tikz}
@@ -7,10 +8,12 @@
 
 \usetheme{Warsaw} 
 \useoutertheme{infolines}
+\setbeamertemplate{caption}[numbered]
+
+\setbeamercovered{transparent}
 
 \setmainfont{MS PGothic}
 \setsansfont{Meiryo UI} %[Mapping=tex-text]
-%\setmonofont{Bitstream Vera Sans Mono}
 \setmonofont{Courier New}
 
 
@@ -52,7 +55,8 @@
 }
 
 
-\setbeamercovered{transparent}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -68,8 +72,12 @@
 \institute[楠本研]{大阪大学大学院　コンピュータサイエンス専攻　楠本研究室}
 \date{2012年5月29日（火）}
 
+\pgfdeclareimage[height=0.5cm]{logo}{figure/Osaka_University_logo.pdf}
+\logo{\pgfuseimage{logo}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document} 
+
 
 \newcommand{\toprule}{\hline}
 \newcommand{\midrule}{\hline}
@@ -79,6 +87,8 @@
 
 \XeTeXlinebreaklocale "jp"  
 \XeTeXlinebreakskip = 0pt plus 1pt 
+
+\renewcommand{\thefigure}{図~\arabic{figure}} 
 
 \frame{\titlepage} 
 
@@ -98,15 +108,22 @@
 \subsection{概要}
 \begin{frame}{概要}
 
+%\transwipe[direction=-90]
+
 この章に、配列や区画とか簡単なモデルで正規テストの手法について紹介します。
+\note[item]{区画：くかく}
+
+\pause
 
 \begin{enumerate}
-\item 8.1節に、いろんなチェックリストで正規と半正規のテスト
-\item 8.2節に、チェックリストを区画に正規化して、簡単な網羅率テストを行い
-\item 8.3節に、操作履歴（Operation Profile, OP）という、区画のために簡単な使用ベースのテスト
-\item 8.4節に、OPを更に発展する手順
-\item 8.5節に、事例研究
+\item<+-> 8.1節に、いろんなチェックリストで正規と半正規のテスト
+\item<+-> 8.2節に、チェックリストを区画に正規化して、簡単な網羅率テストを行い \note[item]{網羅率：もうらりつ}
+\item<+-> 8.3節に、操作履歴（Operation Profile, OP）という、区画のために簡単な使用ベースのテスト
+\item<+-> 8.4節に、OPを更に発展する手順
+\item<+-> 8.5節に、事例研究 \note[item]{事例研究：じれいけんきゅう}
 \end{enumerate}
+
+\pause
 
 第9章には、区画した入力領域の境界テストの条件について、似ているモデルを紹介します。
 
@@ -116,21 +133,28 @@
 \section{8.1 チェックリストに基づくテスト、とその制限}
 \subsection{チェックリストに基づくテスト}
 \begin{frame}{Ad hotテスト \&　ランダムテスト}
-\pgfdeclareimage[width=0.8\textwidth]{Ad-Hoc-Testing}{figure/Ad-Hoc-Testing.jpg}
-\pgfdeclareimage[width=\textwidth]{Random-Testing}{figure/Random-Testing.jpg}
+\pgfdeclareimage[height=0.5\textheight]{Ad-Hoc-Testing}{figure/Ad-Hoc-Testing.jpg}
+\pgfdeclareimage[height=0.5\textheight]{Random-Testing}{figure/Random-Testing.jpg}
+
+\transwipe[direction=0]<2>
+\transwipe[direction=180]<3>
 
 \begin{columns}[t]
 \begin{column}{.5\textwidth}
+\only<1,3>{
 \begin{figure}
 \pgfuseimage{Ad-Hoc-Testing}
 \caption{Ad hot testing}
 \end{figure}
+}
 \end{column}
 \begin{column}{.5\textwidth}
+\only<2,3>{
 \begin{figure}
 \pgfuseimage{Random-Testing}
 \caption{Random testing}
 \end{figure}
+}
 \end{column}
 \end{columns}
 
