@@ -98,7 +98,7 @@
 
 
 \AtBeginSubsection[]{
-  \begin{frame}<trans|beamer>[shrink=10]{小節目次}
+  \begin{frame}<trans|beamer>[shrink=15]{小節目次}
     \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] 
   \end{frame}
 }
@@ -198,7 +198,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[shrink=10]{チェックリストに基づくテスト}
+\begin{frame}[shrink=15]{チェックリストに基づくテスト}
 \framesubtitle{Testing　with checklists}
 \transfade<2>[duration=0.1]
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
@@ -253,7 +253,7 @@
 \framesubtitle{Hierarchical Checklists }
 \note[item]{階層：かいそう}
 \begin{columns}
-    \begin{column}{0.3\textwidth}
+    \begin{column}{0.35\textwidth}
     \flushright{
     \begin{enumerate}
     \item 高レベル項目1
@@ -262,7 +262,7 @@
     \end{enumerate}
     }
     \end{column}
-    \begin{column}{0.1\textwidth}
+    \begin{column}{0.05\textwidth}
     \Huge\[\Rightarrow\]
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -415,7 +415,7 @@
 \begin{frame}{動機の事例}
 \framesubtitle{Some Motivational Examples}
 \mode<article>{\renewcommand{\imageheight}{0.15\textheight}}
-\mode<presentation>{\renewcommand{\imageheight}{0.4\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.35\textheight}}
 \transfade<2->[duration=0.1]
 \begin{columns}
 \begin{column}{0.5\textwidth}
@@ -578,7 +578,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{8.3 Musa氏の操作履歴で使用ベース統計的テスト}
 \subsection{8.3.1 使用ベース統計的テストの場合}
-\begin{frame}{使用ベース統計的テストが適用する場合}
+\begin{frame}[shrink=13]{使用ベース統計的テストが適用する場合}
 \framesubtitle{The Cases for Usage-based Statistical Testing}
 \transwipe<2->
 
@@ -620,7 +620,8 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \begin{frame}{操作履歴を開発プロセスに導入する時期}
 \framesubtitle{The Period of Development Process that Involves Operational Profiles}
 \transfade<2->[duration=0.1]
-\renewcommand{\imageheight}{0.7\textheight}
+\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.7\textheight}}
 \pgfdeclareimage[height=\imageheight]{vmodel}{figure/V-model.JPG}
 \pgfdeclareimage[height=\imageheight]{vmodel-common}{figure/V-model-common.png}
 \pgfdeclareimage[height=\imageheight]{vmodel-op}{figure/V-model-OP.png}
