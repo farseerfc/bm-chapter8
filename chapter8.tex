@@ -8,9 +8,13 @@
 
 \usetheme{Warsaw} 
 \useoutertheme{infolines}
-\setbeamertemplate{caption}[numbered]
 
 \setbeamercovered{transparent}
+
+\renewcommand{\figurename}{図}
+
+\usepackage[overlap,CJK]{ruby}
+\usepackage{multicol}
 
 \setmainfont{MS PGothic}
 \setsansfont{Meiryo UI} %[Mapping=tex-text]
@@ -54,17 +58,11 @@
   numbersep=-1em
 }
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[チェックリストと区画に基づく網羅率と使用テスト]{
-チェックリストと区画に基づく\\
-網羅率と使用テスト\\
-{\small\scshape Coverage and Usage Testing
-    \\Based on Checklists and Partitions}}
+\title[チェックリストと分割に基づく網羅と使用テスト]{
+チェックリストと分割に基づく　網羅と使用テスト\\
+{\small\scshape Coverage and Usage Testing Based on Checklists and Partitions}}
 
 \subtitle[B4M1 輪講]{第8章 ($p107\sim p126$) B4M1 輪講}
 
@@ -72,8 +70,11 @@
 \institute[楠本研]{大阪大学大学院　コンピュータサイエンス専攻　楠本研究室}
 \date{2012年5月29日（火）}
 
-\pgfdeclareimage[height=0.5cm]{logo}{figure/Osaka_University_logo.pdf}
+\pgfdeclareimage[height=0.618cm]{logo}{figure/logo.pdf}
 \logo{\pgfuseimage{logo}}
+
+\mode<article>{\newcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\newcommand{\imageheight}{0.4\textheight}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document} 
@@ -88,18 +89,17 @@
 \XeTeXlinebreaklocale "jp"  
 \XeTeXlinebreakskip = 0pt plus 1pt 
 
-\renewcommand{\thefigure}{図~\arabic{figure}} 
-
 \frame{\titlepage} 
+\mode<article>{\maketitle}
 
-\begin{frame}{目次}
-\tableofcontents 
+\begin{frame}<trans|beamer>[shrink=10]{目次}
+\tableofcontents[section,subsectionstyle=hide,subsubsectionstyle=hide] 
 \end{frame}
 
 
 \AtBeginSubsection[]{
-  \begin{frame}{目次}
-    \tableofcontents[currentsection,currentsubsection] 
+  \begin{frame}<trans|beamer>[shrink=10]{小節目次}
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] 
   \end{frame}
 }
 
@@ -110,59 +110,529 @@
 
 %\transwipe[direction=-90]
 
-この章に、配列や区画とか簡単なモデルで正規テストの手法について紹介します。
-\note[item]{区画：くかく}
-
-\pause
+配列や分割(Partition)とか簡単なモデルで正規テストの手法について紹介します
 
 \begin{enumerate}
-\item<+-> 8.1節に、いろんなチェックリストで正規と半正規のテスト
-\item<+-> 8.2節に、チェックリストを区画に正規化して、簡単な網羅率テストを行い \note[item]{網羅率：もうらりつ}
-\item<+-> 8.3節に、操作履歴（Operation Profile, OP）という、区画のために簡単な使用ベースのテスト
-\item<+-> 8.4節に、OPを更に発展する手順
-\item<+-> 8.5節に、事例研究 \note[item]{事例研究：じれいけんきゅう}
+\item 8.1節に、いろんなチェックリストで正規と半正規のテスト
+\item 8.2節に、チェックリストを分割に正規化して、簡単な網羅テストを行い \note[item]{網羅：もうら}
+\item 8.3節に、操作履歴（Operation Profile, OP）という、分割のために簡単な使用ベースのテスト
+\item 8.4節に、OPを更に発展する手順
+\item 8.5節に、事例研究 \note[item]{事例研究：じれいけんきゅう}
 \end{enumerate}
 
-\pause
-
-第9章には、区画した入力領域の境界テストの条件について、似ているモデルを紹介します。
+第9章には、分割した入力サブドメインの境界条件のテストについて、似ているモデルを紹介します。
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{8.1 チェックリストに基づくテスト、とその制限}
-\subsection{チェックリストに基づくテスト}
-\begin{frame}{Ad hotテスト \&　ランダムテスト}
-\pgfdeclareimage[height=0.5\textheight]{Ad-Hoc-Testing}{figure/Ad-Hoc-Testing.jpg}
-\pgfdeclareimage[height=0.5\textheight]{Random-Testing}{figure/Random-Testing.jpg}
+\subsection{チェックリストに基づくテスト(Testing with Checklists)}
+
+\begin{frame}{Ad hocテスト \&　ランダムテスト}
+\framesubtitle{Ad hoc Testing \& Random Testing}
+
+
+\pgfdeclareimage[height=\imageheight]{Ad-Hoc-Testing}{figure/Ad-Hoc-Testing.jpg}
+\pgfdeclareimage[height=\imageheight]{Random-Testing}{figure/Random-Testing.jpg}
 
 \transwipe[direction=0]<2>
 \transwipe[direction=180]<3>
 
+\mode<presentation>{
 \begin{columns}[t]
 \begin{column}{.5\textwidth}
 \only<1,3>{
 \begin{figure}
+\begin{center}
 \pgfuseimage{Ad-Hoc-Testing}
-\caption{Ad hot testing}
+\caption{Ad hot Testing}
+\end{center}
 \end{figure}
+
 }
+
 \end{column}
 \begin{column}{.5\textwidth}
 \only<2,3>{
 \begin{figure}
+\begin{center}
 \pgfuseimage{Random-Testing}
-\caption{Random testing}
+\caption{Random Testing}
+\end{center}
 \end{figure}
 }
 \end{column}
 \end{columns}
 
+\begin{overprint}
+\onslide<1|handout:0|trans:0> ソフトウェアを\alert{勝手に}実行してその結果を観察
+\onslide<2|handout:0|trans:0> \alert{統計的}にランダムの分布でテストの操作を行い
+\onslide<3|handout:1|trans:1> 繰り返してAd hocテストを実行する時、試験者は行ったテストを追跡すると、チェックリストテストになった
+\end{overprint}
+}
+
+\mode<article>{
+図~\ref{fig:adhoc}ソフトウェアを\alert{勝手に}実行してその結果を観察
+
+図~\ref{fig:random} \alert{統計的}にランダムの分布でテストの操作を行い
+
+繰り返してAd hocテストを実行する時、試験者は行ったテストを追跡すると、チェックリストテストになった
+
+\begin{figure}
+\begin{center}
+\label{fig:adhoc}
+\pgfuseimage{Ad-Hoc-Testing}
+\caption{Ad Hot Testing}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\label{fig:random}
+\pgfuseimage{Random-Testing}
+\caption{Random Testing}
+\end{center}
+\end{figure}
+}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{チェックリストに基づくテスト}
+\begin{frame}[shrink=10]{チェックリストに基づくテスト}
+\framesubtitle{Testing　with checklists}
+\transfade<2>[duration=0.1]
+\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.5\textheight}}
+\pgfdeclareimage[height=\imageheight]{checklist}{figure/checklist.jpg}
+\pgfdeclareimage[height=\imageheight]{blackboxchecklist}{figure/blackboxchecklist.png}
+\begin{columns}[t]
+    \begin{column}{.6\textwidth}
+    \begin{itemize}
+    \item 黒箱テスト
+        \begin{itemize}
+        \item ソフトウェア要求チェックリスト
+        \item 機能チェックリスト
+            \begin{itemize}
+            \item システム全体から高レベルの機能
+            \item 低レベルの字句、独立な部品
+            \end{itemize}
+        \end{itemize}
+    \item 白箱テスト
+        \begin{itemize}
+        \item プログラムの特徴
+        \item コーディング標準
+        \item 単体テストの文の網羅
+        \item 統合テストとシステムテストの部品の網羅
+        \item 構造と特徴など、実装に関しるチェックリスト
+            \begin{itemize}
+            \item 関数の呼び出し規則
+            \item 資源の生産者と消費者
+            \item モジュール間に共有するデータ
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \end{column}
+        \begin{column}{.35\textwidth}
+        \begin{figure}
+        \begin{center}
+            \begin{overlayarea}{\textwidth}{0.6\textheight}
+            \begin{center}
+            \only<1|handout:0|trans:0|article:0>{\pgfuseimage{checklist}}
+            \only<2|handout:1|trans:1>{\pgfuseimage{blackboxchecklist}}
+            \end{center}
+            \end{overlayarea}
+        \caption{チェックリスト}
+        \end{center}
+        \end{figure}
+    \end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{階層及び複合チェックリスト(Hierarchical and Combined Checklists)}
+\begin{frame}{階層チェックリスト}
+\framesubtitle{Hierarchical Checklists }
+\note[item]{階層：かいそう}
+\begin{columns}
+    \begin{column}{0.3\textwidth}
+    \flushright{
+    \begin{enumerate}
+    \item 高レベル項目1
+    \item 高レベル項目2
+    \item 高レベル項目3
+    \end{enumerate}
+    }
+    \end{column}
+    \begin{column}{0.1\textwidth}
+    \Huge\[\Rightarrow\]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{enumerate}
+    \item 高レベル項目1
+        \begin{enumerate}
+        \item 低レベル項目1
+        \item 低レベル項目2
+        \item 低レベル項目3
+        \end{enumerate}
+    \item 高レベル項目2
+        \begin{enumerate}
+        \item 低レベル項目4
+        \item 低レベル項目5
+        \end{enumerate}
+    \item 高レベル項目3
+        \begin{enumerate}
+        \item 低レベル項目6
+        \item 低レベル項目7
+        \item 低レベル項目8
+        \end{enumerate}
+    \end{enumerate}
+    \end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[shrink=5]{複合チェックリスト}
+\framesubtitle{Combined Checklists}
+
+\note[item]{複合：ふくごう}
+\pgfdeclareimage[height=\imageheight]{2dchecklist}{figure/2dchecklist.png}
+\transfade<2->[duration=0.1]
+
+\begin{tabular}{lc}
+& \begin{actionenv}<uncover@3|alert@3|article:0> 要求1 \quad 要求2 \quad 要求3\end{actionenv} \\
+\begin{minipage}{0.3\textwidth}
+\begin{enumerate}
+\begin{actionenv}<uncover@1-3>
+\item 部品1
+    \begin{actionenv}<uncover@2,3 | alert@3>
+    \begin{enumerate}
+    \item 要求1
+    \item 要求2
+    \item 要求3
+    \end{enumerate}
+    \end{actionenv}
+\item 部品2
+    \begin{actionenv}<uncover@2,3 | alert@3>
+    \begin{enumerate}
+    \item 要求1
+    \item 要求2
+    \item 要求3
+    \end{enumerate}
+    \end{actionenv}
+\item 部品3
+    \begin{actionenv}<uncover@2,3 | alert@3>
+    \begin{enumerate}
+    \item 要求1
+    \item 要求2
+    \item 要求3
+    \end{enumerate}
+    \end{actionenv}
+\end{actionenv}
+\end{enumerate} 
+\end{minipage} & 
+\mode<presentation>{\visible<4>{
+    \begin{minipage}{0.4\textwidth}
+        \begin{figure}
+            \begin{center}
+            \pgfuseimage{2dchecklist}
+            \end{center}
+        \caption{標準チェックリストと部品チェックリストを複合した二次元表}
+        \end{figure}
+    \end{minipage}
+}}
+\end{tabular}
+
+\mode<article>{
+\begin{figure}
+    \begin{center}
+    \pgfuseimage{2dchecklist}
+    \end{center}
+\caption{標準チェックリストと部品チェックリストを複合した二次元表}
+\end{figure}
+}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{チェックリストの問題点と制限（Problems and Limits of Checklists）}
+\begin{frame}{チェックリストの問題点}
+\framesubtitle{Problems General Checklists}
+
+\begin{itemize}
+\item チェックリストの定義が抽象過ぎて、具体的にするのが難しい
+    \begin{itemize}
+    \item 特に高レベル
+    \end{itemize}
+\item 具体的なテストケースに変換するのは
+    \begin{itemize}
+    \item 経験が必要
+    \item 特殊な環境や設定等に依存
+    \end{itemize}
+\item 大規模な、複雑なシステムに、相互接続と相互作用を定義するのも難しい 
+    \note[item]{相互接続:そうごせつぞく}
+    \note[item]{相互作用:そうごさよう}
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{チェックリストの制限}
+\framesubtitle{Limitations of General Checklists}
+\transfade<2->[duration=0.1]
+\begin{enumerate}
+\item 全部の機能（黒箱テスト）又は構造部品（白箱テスト）を、異なる視点や保証レベルから、網羅することが難しい
+    \begin{itemize}
+    \item 網羅されていない穴（Hole）が残ってしまい
+    \item<uncover@3-|alert@3> 分割したチェックリストを使う
+    \end{itemize}
+\item より高い網羅率を着目すると、重複したテストを取り込んでしまい
+    \begin{itemize}
+    \item 無駄なテストを行われてしまい
+    \item<uncover@3-|alert@3> 分割したチェックリストを使う
+    \end{itemize}
+\item 各システムの部品間の複雑な相互作用を定義するのは難しい
+    \begin{itemize}
+    \item<uncover@2-|alert@2>　10、11章にFSM基づく体系的な正規モデルを紹介
+    \note[item]{体系的:たいけいてき} \note[item]{FSM: 有限状態機械(ゆうげんじょうたいきかい)、有限オートマトン}
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{8.2 分割網羅テスト（Testing for Partition Coverage）}
+\subsection{紹介}
+\begin{frame}{分割網羅テスト}
+\framesubtitle{Testing for Partition Coverage}
+\begin{itemize}
+\item 分割と分割を基づくテストは一種のチェックリスト・テスト
+\item 分割は集合全体を徹底的に覆う　\note[item]{覆う:おおう} \note[item]{徹底的：てっていてき}
+    \begin{itemize}
+    \item より高い\alert{網羅率}
+    \end{itemize}
+\item 分割はお互いに重複ことができない
+    \begin{itemize}
+    \item より高い\alert{効率}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.2.1 動機の事例(Some Motivational Examples)}
+\begin{frame}{動機の事例}
+\framesubtitle{Some Motivational Examples}
+\mode<article>{\renewcommand{\imageheight}{0.15\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.4\textheight}}
+\transfade<2->[duration=0.1]
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\[ ax^2+bx+c = 0 \]
+\pause
+その解を求めると
+\[ r=\frac{-b \pm \sqrt{b^2-4ac}}{2a} \]
+\pause
+全部可能な入力の組み合わせ
+\[ 2^{32} \times 2^{32} \times 2^{32} = 2^{96}\]
+\end{column}
+\begin{column}{0.5\textwidth}
+\only<4->{
+\pgfdeclareimage[height=\imageheight]{axbxc}{figure/axbxc.png}
+\begin{figure}
+\begin{center}
+\pgfuseimage{axbxc}
+\caption{$ax^2+bx+c=0$のテストケース}
+\end{center}
+\end{figure}
+}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.2.2 分割：概念と定義（Partition: Concepts and Definitions）}
+\begin{frame}[shrink=10]{分割：概念と定義}
+\framesubtitle{Partition: Concepts and Definitions}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{enumerate}
+\item 分割した集合は相互に排他し、一つの要素が2つの集合に共有されていることがない
+    \[ \forall i,j,i\neq j \Rightarrow G_i \cap G_j = \emptyset \]
+\item 分割した集合の和集合は全体の集合、和集合に分割する前に元の集合の全てが含まれている
+    \[ \bigcup_{i=1}^{n} G_i = S \]
+\end{enumerate}
+
+\end{column}
+\begin{column}{0.5\textwidth}
+分割した集合は同値類になる。
+
+同値関係を持つには
+\begin{enumerate}
+\item 反射率 \\ $R(a,a)$ が常に成り立つ
+\item 対称律 \\ $R(a,b) \Rightarrow R(b,a) $
+\item 推移律 \\ $R(a,b) \wedge R(b,c) \Rightarrow R(a,c)$
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.2.3 分割テストの決定と網羅範囲の予測}
+\begin{frame}{分割テストの網羅範囲の決定}
+\framesubtitle{Testing Decisions for Partition Coverage}
+分割テストは一種のチェックリストであり、分割の種類は8.1節に述べたチェックリストの種類に似ている。但し、分割の決定は以下のとおりに決められている
+\begin{enumerate}
+\item 製品実体によって分割
+    \begin{itemize}
+    \item 例えば外部関数（黒箱視点）又はシステム部品（白箱視点）
+    \item<uncover@2-|alert@2>
+    チェックリストと同じ
+    \end{itemize}
+\item 性質、関係、論理的な条件によって分割、更に2つに分かれている
+    \begin{itemize}
+    \item 論理変数を論理演算子に結ばれた論理述語による \note[item]{述語:じゅつご}
+    \item 数字変数を比較演算子によって比較する
+    \item<uncover@3-|alert@3>
+    論理述語や比較演算によって入力区間を分割
+    \item<uncover@4-|alert@4>
+    決定木を使う
+    \end{itemize}
+\item 1と2の組み合わせ 
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{決定木によって分割}
+\framesubtitle{Testing Decisions based on Decision Tree}
+\transfade<2->[duration=0.1]
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+
+\tikzstyle{level 1}=[level distance=1.5cm, sibling distance=2.5cm]
+\tikzstyle{level 2}=[level distance=1cm, sibling distance=2cm]
+\tikzstyle{level 3}=[level distance=1cm, sibling distance=1.5cm]
+\tikzstyle{bag} = [rectangle, text width=6em, text centered, draw]
+\tikzstyle{decision} = [rectangle, minimum height=8pt, minimum width=8pt, fill, inner sep=0pt]
+\tikzstyle{choice} = [circle, minimum width=8pt, fill, inner sep=0pt]
+\tikzstyle{end} = [regular polygon, regular polygon sides=3, minimum width=8pt, fill, inner sep=0pt,shape border rotate=90]
+
+\begin{tikzpicture}[grow=right,child anchor=west]
+\tiny
+\node[bag]{\only<1|handout:0|trans:0|article:0>{最初決定}\only<2|handout:1|trans:1|article:1>{決定$P$}}
+child {
+    node[decision]{}
+    child {
+        node[bag]{\only<1|handout:0|trans:0|article:0>{中間決定1}\only<2|handout:1|trans:1|article:1>{決定$Q$}}
+            child{
+                node[choice]{}
+                child {
+                    node[bag]{\only<1|handout:0|trans:0|article:0>{結果1}\only<2|handout:1|trans:1|article:1>{$P \wedge Q$}}
+                    child {
+                        node[end]{}
+                    }
+                }
+                child {
+                    node[bag]{\only<1|handout:0|trans:0|article:0>{結果2}\only<2|handout:1|trans:1|article:1>{$P \wedge \neg Q$}}
+                    child {
+                        node[end]{}
+                    }
+                }
+            }
+    }
+    child {
+        node[bag]{\only<1|handout:0|trans:0|article:0>{中間決定2}\only<2|handout:1|trans:1|article:1>{決定$Q$}}
+            child{
+                node[choice]{}
+                child {
+                    node[bag]{\only<1|handout:0|trans:0|article:0>{結果3}\only<2|handout:1|trans:1|article:1>{$\neg P \wedge Q$}}
+                    child {
+                        node[end]{}
+                    }
+                }
+                child {
+                    node[bag]{\only<1|handout:0|trans:0|article:0>{結果4}\only<2|handout:1|trans:1|article:1>{$\neg P \wedge \neg Q$}}
+                    child {
+                        node[end]{}
+                    }
+                }
+            }
+        }
+    };
+\end{tikzpicture}
+
+\only<1|handout:0|trans:0|article:0>{一貫性がない決定木}
+\only<2|handout:1|trans:1|article:1>{一貫性を持つ決定木}
+
+\uncover<2>{決定木の上、一つの結果は一つの分割方法となって、パスを沿って結果を成り立たせる入力の範囲を求める}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=java,escapechar=@]
+if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:1|article:1>{@P@}@){
+    if(@\only<1|handout:0|trans:0|article:0>{@中間決定1@}\only<2|handout:1|trans:1|article:1>{@Q@}@){
+        @\only<1|handout:0|trans:0|article:0>{@結果1@}\only<2|handout:1|trans:1|article:1>{@$P \wedge Q$@}@;
+    }else{
+        @\only<1|handout:0|trans:0|article:0>{@結果2@}\only<2|handout:1|trans:1|article:1>{@$P \wedge \neg Q$@}@;
+    }
+}else{
+    if(@\only<1|handout:0|trans:0|article:0>{@中間決定2@}\only<2|handout:1|trans:1|article:1>{@Q@}@){
+        @\only<1|handout:0|trans:0|article:0>{@結果3@}\only<2|handout:1|trans:1|article:1>{@$\neg P \wedge Q$@}@;
+    }else{
+        @\only<1|handout:0|trans:0|article:0>{@結果4@}\only<2|handout:1|trans:1|article:1>{@$\neg P \wedge \neg Q$@}@;
+    }
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{8.3 Musa氏の操作履歴で使用ベース統計的テスト}
+\subsection{8.3.1 使用ベース統計的テストの場合}
+\begin{frame}{使用ベース統計的テストが適用する場合}
+\framesubtitle{The Cases for Usage-based Statistical Testing}
+\transwipe<2->
+
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\begin{tabular}{lrl}
+\hline
+  操作   & \uncover<2->{頻度(\%)} & \\
+\hline
+スブドメイン1 &                      & \\
+-操作1   & \uncover<2->{ 1\% }  & \\
+-操作2   & \uncover<2->{72\% }  & \uncover<3->{$\checkmark$} \\
+-操作3   & \uncover<2->{ 2\% }  & \\
+スブドメイン2 &                      & \\
+-操作4   & \uncover<2->{13\% }  & \uncover<3->{$\checkmark$} \\
+-操作5   & \uncover<2->{ 2\% }  & \\
+スブドメイン3 &                      & \\
+-操作6   & \uncover<2->{ 3\% }  & \\
+-操作7   & \uncover<2->{ 7\% }  & \\
+\hline
+\end{tabular}
+\end{column}
+\begin{column}{0.6\textwidth}
+\only<4->{
+\begin{enumerate}
+\item 使用シナリオ、パターン、関連する使用頻度を、目標消費者やユーザーから収集
+\item 収集した情報を分析し、操作履歴（OP, Operation Profile）に整理
+\item 操作履歴によってテストを行い
+\item テストの結果を分析し、製品の信頼性を評価し、テストのフィードバックやソフトウェア開発プロセスに役立つ
+    \begin{itemize}
+    \item<uncover@5-> 製品の信頼性を評価する方法は22章に紹介する、他のテストに関係する活動は7章に紹介した
+    \end{itemize}
+\end{enumerate}
+}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{操作履歴を開発プロセスに導入する時期}
+\framesubtitle{The Period of Development Process that Involves Operational Profiles}
+\transfade<2->[duration=0.1]
+\renewcommand{\imageheight}{0.7\textheight}
+\pgfdeclareimage[height=\imageheight]{vmodel}{figure/V-model.JPG}
+\pgfdeclareimage[height=\imageheight]{vmodel-common}{figure/V-model-common.png}
+\pgfdeclareimage[height=\imageheight]{vmodel-op}{figure/V-model-OP.png}
+\begin{figure}
+\begin{center}
+\begin{overprint}
+\onslide<1|handout:0|trans:0|article:0> \begin{center}\pgfuseimage{vmodel}\end{center}
+\onslide<2|handout:0|trans:0|article:0> \begin{center}\pgfuseimage{vmodel-common}\end{center}
+\onslide<3|handout:1|trans:1|article:1> \begin{center}\pgfuseimage{vmodel-op}\end{center}
+\end{overprint}
+\caption{操作履歴を開発プロセスに導入する時期}
+\end{center}
+\end{figure}
+\end{frame}
 \end{document}
