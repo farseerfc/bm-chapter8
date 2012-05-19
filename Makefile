@@ -16,7 +16,7 @@ $(OBJS): $(MAIN).tex
 	$(LATEX) $(MAIN).$@.$(ASPECT)
     
 notes: $(MAIN).tex
-	echo "\\documentclass[CJK,aspectratio=$(ASPECT),$(SIZE),handout]{beamer}" >$(MAIN).notes.$(ASPECT).tex
+	echo "\\documentclass[CJK,aspectratio=$(ASPECT),$(SIZE)]{beamer}" >$(MAIN).notes.$(ASPECT).tex
 	echo "\\usepackage{pgf,pgfpages}"
 	echo "\\setbeameroption{show notes}"  >>$(MAIN).notes.$(ASPECT).tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).notes.$(ASPECT).tex
