@@ -115,7 +115,7 @@
 \begin{enumerate}
 \item 8.1節に、いろんなチェックリストで正規と半正規のテスト
 \item 8.2節に、チェックリストを分割に正規化して、簡単な網羅テストを行い \note[item]{網羅：もうら}
-\item 8.3節に、操作履歴（Operation Profile, OP）という、分割のために簡単な使用ベースのテスト
+\item 8.3節に、操作分布（Operation Profile, OP）という、分割のために簡単な使用ベースのテスト
 \item 8.4節に、OPを更に発展する手順
 \item 8.5節に、事例研究 \note[item]{事例研究：じれいけんきゅう}
 \end{enumerate}
@@ -576,7 +576,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.3 Musa氏の操作履歴で使用ベース統計的テスト}
+\section{8.3 Musa氏の操作分布で使用ベース統計的テスト}
 \subsection{8.3.1 使用ベース統計的テストの場合}
 \begin{frame}[shrink=13]{使用ベース統計的テストが適用する場合}
 \framesubtitle{The Cases for Usage-based Statistical Testing}
@@ -597,7 +597,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 -操作5   & \uncover<2->{ 2\% }  & \\
 スブドメイン3 &                      & \\
 -操作6   & \uncover<2->{ 3\% }  & \\
--操作7   & \uncover<2->{ 7\% }  & \\
+-操作7   & \uncover<2->{ 7\% }  & \uncover<3->{$\checkmark$} \\
 \hline
 \end{tabular}
 \end{column}
@@ -605,8 +605,8 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \only<4->{
 \begin{enumerate}
 \item 使用シナリオ、パターン、関連する使用頻度を、目標消費者やユーザーから収集
-\item 収集した情報を分析し、操作履歴（OP, Operation Profile）に整理
-\item 操作履歴によってテストを行い
+\item 収集した情報を分析し、操作分布（OP, Operation Profile）に整理
+\item 操作分布によってテストを行い
 \item テストの結果を分析し、製品の信頼性を評価し、テストのフィードバックやソフトウェア開発プロセスに役立つ
     \begin{itemize}
     \item<uncover@5-> 製品の信頼性を評価する方法は22章に紹介する、他のテストに関係する活動は7章に紹介した
@@ -617,7 +617,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{操作履歴を開発プロセスに導入時期}
+\begin{frame}{操作分布を開発プロセスに導入時期}
 \framesubtitle{The Period of Development Process that Involves Operational Profiles}
 \transfade<2->[duration=0.5]
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
@@ -632,8 +632,13 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \onslide<2|handout:0|trans:0|article:0> \begin{center}\pgfuseimage{vmodel-common}\end{center}
 \onslide<3|handout:1|trans:1|article:1> \begin{center}\pgfuseimage{vmodel-op}\end{center}
 \end{overprint}
-\caption{操作履歴を開発プロセスに導入する時期}
+\caption{操作分布を開発プロセスに導入する時期}
 \end{center}
 \end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.3.2 Musa操作分布:基本的な考え方(Musa OP:Basic Ideas)}
+\begin{frame}{Musa操作分布:基本的な考え方}
+\framesubtitle{Musa OP:Basic Ideas}
 \end{frame}
 \end{document}
