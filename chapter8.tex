@@ -12,9 +12,12 @@
 \setbeamercovered{transparent}
 
 \renewcommand{\figurename}{図}
+\newtheorem{definationfc}{定義}
 
 \usepackage[overlap,CJK]{ruby}
 \usepackage{multicol}
+\usepackage[sort&compress]{natbib}
+
 
 \setmainfont{MS PGothic}
 \setsansfont{Meiryo UI} %[Mapping=tex-text]
@@ -79,12 +82,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document} 
 
-
+\mode<presentation>{
+\newcommand{\newblock}{}
 \newcommand{\toprule}{\hline}
 \newcommand{\midrule}{\hline}
 \newcommand{\bottomrule}{\hline}
 \newcommand{\itemtitle}[1]{\item \alert{#1} \quad{} }
 \newcommand{\upcite}[1]{ }
+}
 
 \XeTeXlinebreaklocale "jp"  
 \XeTeXlinebreakskip = 0pt plus 1pt 
@@ -98,7 +103,7 @@
 
 
 \AtBeginSubsection[]{
-  \begin{frame}<trans|beamer>[shrink=15]{小節目次}
+  \begin{frame}<trans|beamer>[shrink=25]{小節目次}
     \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] 
   \end{frame}
 }
@@ -638,7 +643,83 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.2 Musa操作分布:基本的な考え方(Musa OP:Basic Ideas)}
-\begin{frame}{Musa操作分布:基本的な考え方}
-\framesubtitle{Musa OP:Basic Ideas}
+\begin{frame}{Musa操作分布:基本的な考え方（定義）}
+\framesubtitle{Musa OP:Basic Ideas(Defination)}
+\begin{definationfc}[操作分布]
+操作分布とは、一連の操作とそれらの出現に関連する確率の配列 
+
+An operational profile is a list of disjoint set of operations and their associated probabilities of occurrence
+
+\flushright{---\cite{musa1993operational}}
+\end{definationfc}
+\bibliographystyle{IEEEtranN}
+\bibliography{chapter8}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Musa操作分布:基本的な考え方（例）}
+\framesubtitle{Musa OP:Basic Ideas(Example)}
+\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.6\textheight}}
+\pgfdeclareimage[height=\imageheight]{OPfiles}{figure/OPfiles.png}
+\pgfdeclareimage[height=\imageheight]{OPgraph}{figure/OPgraph.png}
+\begin{columns}
+
+\begin{column}{0.4\textwidth}
+\begin{figure}
+\begin{center}
+\pgfuseimage{OPfiles}
+\caption{SMU/SEASの各ファイル型の使用頻度とその確率}
+\end{center}
+\end{figure}
+\end{column}
+\begin{column}{0.6\textwidth}
+\begin{figure}
+\begin{center}
+\pgfuseimage{OPgraph}
+\caption{SMU/SEASの各ファイル型の使用確率}
+\end{center}
+\end{figure}
+\end{column}
+\end{columns}
+
+\note[item]{使用確率によってsortする必要は限られていない}
+\note[item]{使用確率の分布が均一（きんいつ）とは限られていない}
+\note[item]{均一（きんいつ）とは限られていないから、閾値を決めてフィルタリングすることが可能}
+\note[item]{具体的に、操作分布はチェックリストでもあるし、分割でもあり。}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.3.3 操作分布を用いて統計的などのテスト等に使う}
+\begin{frame}{操作分布を用いて\alert{統計的}なテストに使う}
+\framesubtitle{Using OPs for Statistical Testing }
+\begin{tabular}{lrr}
+\hline
+  操作   & \uncover<2->{頻度(\%)} & \uncover<3->{テスト数(合計30)}\\
+\hline
+スブドメイン1 &                      & \\
+-操作1   & \uncover<2->{ 1\% }  & \uncover<3->{0}  \\
+-操作2   & \uncover<2->{72\% }  & \uncover<3->{24} \\
+-操作3   & \uncover<2->{ 2\% }  & \uncover<3->{0} \\
+スブドメイン2 &                      & \\
+-操作4   & \uncover<2->{13\% }  & \uncover<3->{4} \\
+-操作5   & \uncover<2->{ 2\% }  & \uncover<3->{0} \\
+スブドメイン3 &                      & \\
+-操作6   & \uncover<2->{ 3\% }  & \uncover<3->{1} \\
+-操作7   & \uncover<2->{ 7\% }  & \uncover<3->{2} \\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{操作分布を用いて\alert{進歩的}なテストに使う}
+\framesubtitle{Using OPs for Progressive Testing}
+\begin{tikzpicture}
+\draw[ycomb,
+    color=gray,
+    line width=0.5cm]
+    plot coordinates{(24,1) (4,2) (1,3) (2,4)};
+\end{tikzpicture}
+\end{frame}
+
 \end{document}
