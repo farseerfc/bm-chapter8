@@ -76,19 +76,20 @@
 \pgfdeclareimage[height=0.618cm]{logo}{figure/logo.pdf}
 \logo{\pgfuseimage{logo}}
 
-\mode<article>{\newcommand{\imageheight}{0.2\textheight}}
-\mode<presentation>{\newcommand{\imageheight}{0.4\textheight}}
+\mode<article>{\providecommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\providecommand{\imageheight}{0.4\textheight}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document} 
 
 \mode<presentation>{
-\newcommand{\newblock}{}
-\newcommand{\toprule}{\hline}
-\newcommand{\midrule}{\hline}
-\newcommand{\bottomrule}{\hline}
-\newcommand{\itemtitle}[1]{\item \alert{#1} \quad{} }
-\newcommand{\upcite}[1]{ }
+
+\providecommand{\newblock}{\\}
+\providecommand{\toprule}{\hline}
+\providecommand{\midrule}{\hline}
+\providecommand{\bottomrule}{\hline}
+\providecommand{\itemtitle}[1]{\item \alert{#1} \quad{} }
+\providecommand{\upcite}[1]{ }
 }
 
 \XeTeXlinebreaklocale "jp"  
