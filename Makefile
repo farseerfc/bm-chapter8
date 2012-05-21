@@ -32,9 +32,9 @@ article: $(MAIN).tex
 	$(LATEX) $(MAIN).article.tex
 
 pure:
-	rm -fv $(MAIN).{draft,handout,beamer,trans,second,notes}.*.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,fdb_latexmk}
-	rm -fv $(MAIN).article.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,fdb\_latexmk}
-	rm -fv $(MAIN).{aux,log,nav,out,snm,toc,vrb,bbl,blg}
+	rm -fv $(MAIN).{draft,handout,beamer,trans,second,notes}.*.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,bbl,blg,fdb\_latexmk}
+	rm -fv $(MAIN).article.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,bbl,blg,fdb\_latexmk}
+	rm -fv $(MAIN).{aux,log,nav,out,snm,toc,vrb,bbl,blg,fdb\_latexmk}
 	rm -fv texlog texput.log missfont.log
 
 clean:  pure

@@ -643,7 +643,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.2 Musa操作分布:基本的な考え方(Musa OP:Basic Ideas)}
-\begin{frame}{Musa操作分布:基本的な考え方（定義）}
+\begin{frame}[shrink=10]{Musa操作分布:基本的な考え方（定義）}
 \framesubtitle{Musa OP:Basic Ideas(Defination)}
 \begin{definationfc}[操作分布]
 操作分布とは、一連の操作とそれらの出現に関連する確率の配列 
@@ -658,7 +658,7 @@ An operational profile is a list of disjoint set of operations and their associa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Musa操作分布:基本的な考え方（例）}
+\begin{frame}[shrink=10]{Musa操作分布:基本的な考え方（例）}
 \framesubtitle{Musa OP:Basic Ideas(Example)}
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.6\textheight}}
@@ -692,15 +692,16 @@ An operational profile is a list of disjoint set of operations and their associa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.3 操作分布を用いて統計的などのテスト等に使う}
-\begin{frame}{操作分布を用いて\alert{統計的}なテストに使う}
+\begin{frame}[shrink=10]{操作分布を用いて\alert{統計的}なテストに使う}
 \framesubtitle{Using OPs for Statistical Testing }
+\begin{center}
 \begin{tabular}{lrr}
 \hline
   操作   & \uncover<2->{頻度(\%)} & \uncover<3->{テスト数(合計30)}\\
 \hline
 スブドメイン1 &                      & \\
 -操作1   & \uncover<2->{ 1\% }  & \uncover<3->{0}  \\
--操作2   & \uncover<2->{72\% }  & \uncover<3->{24} \\
+-操作2   & \uncover<2->{72\% }  & \uncover<3->{23} \\
 -操作3   & \uncover<2->{ 2\% }  & \uncover<3->{0} \\
 スブドメイン2 &                      & \\
 -操作4   & \uncover<2->{13\% }  & \uncover<3->{4} \\
@@ -710,16 +711,59 @@ An operational profile is a list of disjoint set of operations and their associa
 -操作7   & \uncover<2->{ 7\% }  & \uncover<3->{2} \\
 \hline
 \end{tabular}
+\end{center}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{操作分布を用いて\alert{進歩的}なテストに使う}
 \framesubtitle{Using OPs for Progressive Testing}
-\begin{tikzpicture}
-\draw[ycomb,
-    color=gray,
-    line width=0.5cm]
-    plot coordinates{(24,1) (4,2) (1,3) (2,4)};
+\transfade<2->[duration=0.1]
+\animate<2-7>
+\begin{center}
+\mode<article>{\def\tikzy{0.04cm}\def\tikzx{0.6cm}}
+\mode<presentation>{\def\tikzy{0.07cm}\def\tikzx{1cm}}
+\begin{tikzpicture}[x=\tikzx,y=\tikzy]
+\draw[ycomb, color=gray, line width=0.5cm] plot file {data-prog};
+\draw[->] (-0.5,0) -- (8,0) node[right] {操作};
+\only<1>{\draw[-] (-0.5,75) -- (8,75) node[right] {};}
+\only<2>{\draw[-] (-0.5,50) -- (8,50) node[right] {};}
+\only<3>{\draw[-] (-0.5,15) -- (8,15) node[right] {};}
+\only<4>{\draw[-] (-0.5,10) -- (8,10) node[right] {};}
+\only<5>{\draw[-] (-0.5,6) -- (8,6) node[right] {};}
+\only<6>{\draw[-] (-0.5,3) -- (8,3) node[right] {};}
+\only<7>{\draw[-] (-0.5,2) -- (8,2) node[right] {};}
+\only<8>{\draw[-] (-0.5,1) -- (8,1) node[right] {};}
+\draw[->] (0,-0.5) -- (0,75) node[above] {テストケース数};
 \end{tikzpicture}
+\end{center}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{他に操作分布の使う目的}
+\framesubtitle{OPs Used in Other Situations for Various Purpose}
+\begin{itemize}
+\item 進歩的テストによって、ソフトウェアの信頼性目標に達成するまで予測
+    \note[item]{信頼性目標の予測を22章に紹介する}
+\item 開発効率の向上
+    \note[item]{あんまり使われていない部分のテストを防いだ}
+    \begin{itemize}
+    \item AT\&Tで行われた実験のデータによると、56\%のシステム・テスト・コストと11.5\%の全体のコストを削減（さくげん）した
+    \end{itemize}
+\item よく使われる機能を特定し、それに着目して新しい機能や製品を開発
+    \begin{itemize}
+    \item あまり使われていない機能は後で
+    \item 螺旋(spiral)開発やプロトタイプ開発などのプロセスに使える
+    \end{itemize}
+\item 顧客とより良い交流とより深い関係
+    \begin{itemize}
+    \item 顧客から製品の品質や機能に対する意見を把握できる
+    \item もっと細かい要求分析と仕様が可能になる
+    \item 顧客トレーニングを実行すべき項目を特定できる
+    \end{itemize}
+\item 投資の高い収益率
+    \begin{itemize}
+    \item 線形に近いコストの成長率
+    \end{itemize}
+    \note[item]{AT\&Tのデータによると、普通の製品に対すOP開発コストは1人月。}
+    \note[item]{普通の定義は10万行、10人の開発者で一年半}
+\end{itemize}
+\end{frame}
 \end{document}
