@@ -693,6 +693,7 @@ An operational profile is a list of disjoint set of operations and their associa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.3 操作分布を用いて統計的などのテスト等に使う}
+
 \begin{frame}[shrink=10]{操作分布を用いて\alert{統計的}なテストに使う}
 \framesubtitle{Using OPs for Statistical Testing }
 \begin{center}
@@ -715,15 +716,21 @@ An operational profile is a list of disjoint set of operations and their associa
 \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{操作分布を用いて\alert{進歩的}なテストに使う}
+\begin{frame}{操作分布を用いて\alert{進捗}テストに使う}
 \framesubtitle{Using OPs for Progressive Testing}
 \transfade<2->[duration=0.1]
 \animate<2-7>
 \begin{center}
 \mode<article>{\def\tikzy{0.04cm}\def\tikzx{0.6cm}}
-\mode<presentation>{\def\tikzy{0.07cm}\def\tikzx{1cm}}
+\mode<presentation>{\def\tikzy{0.06cm}\def\tikzx{1cm}}
 \begin{tikzpicture}[x=\tikzx,y=\tikzy]
 \draw[ycomb, color=gray, line width=0.5cm] plot file {data-prog};
+\foreach \x in {0,...,7}
+    \draw (\x,1pt) -- (\x,-3pt)
+    node[anchor=north] {\x};
+\foreach \y in {0,15,...,75}
+    \draw (1pt,\y) -- (-3pt,\y) 
+        node[anchor=east] {\y\%}; 
 \draw[->] (-0.5,0) -- (8,0) node[right] {操作};
 \only<1>{\draw[-] (-0.5,75) -- (8,75) node[right] {};}
 \only<2>{\draw[-] (-0.5,50) -- (8,50) node[right] {};}
@@ -733,7 +740,7 @@ An operational profile is a list of disjoint set of operations and their associa
 \only<6>{\draw[-] (-0.5,3) -- (8,3) node[right] {};}
 \only<7>{\draw[-] (-0.5,2) -- (8,2) node[right] {};}
 \only<8>{\draw[-] (-0.5,1) -- (8,1) node[right] {};}
-\draw[->] (0,-0.5) -- (0,75) node[above] {テストケース数};
+\draw[->] (0,-0.5) -- (0,75) node[above] {テストケース};
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -741,7 +748,7 @@ An operational profile is a list of disjoint set of operations and their associa
 \begin{frame}{他に操作分布の使う目的}
 \framesubtitle{OPs Used in Other Situations for Various Purpose}
 \begin{itemize}
-\item 進歩的テストによって、ソフトウェアの信頼性目標に達成するまで予測
+\item 進捗テストによって、ソフトウェアの信頼性目標に達成するまで予測
     \note[item]{信頼性目標の予測を22章に紹介する}
 \item 開発効率の向上
     \note[item]{あんまり使われていない部分のテストを防いだ}
@@ -766,5 +773,28 @@ An operational profile is a list of disjoint set of operations and their associa
     \note[item]{AT\&Tのデータによると、普通の製品に対すOP開発コストは1人月。}
     \note[item]{普通の定義は10万行、10人の開発者で一年半}
 \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{8.4 操作分布を構築(Constructing Operational Profiles)}
+\subsection{8.4.1 一般的な方法と参加者(Generic methods and participants)}
+\begin{frame}{単一の操作分布か？多数の操作分布か？}
+\framesubtitle{Single Operational Profiles? Multiple Operational Profiles?}
+ユーザの使用型によって
+\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.5\textheight}}
+\pgfdeclareimage[height=\imageheight]{user}{figure/user.jpg}
+\pgfdeclareimage[height=\imageheight]{stakeholders}{figure/stakeholders.png}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\pgfuseimage{user}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\pgfuseimage{stakeholders}
+\end{center}
+\end{column}
+\end{columns}
 \end{frame}
 \end{document}
