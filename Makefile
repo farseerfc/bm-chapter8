@@ -5,7 +5,6 @@ SIZE=14pt
 ASPECT=169
 MAIN=chapter8
 LATEX=latexmk -xelatex 
-OUTPUT=.
 
 OBJS=beamer trans handout 
 
@@ -20,7 +19,7 @@ $(OBJS): $(MAIN).tex
 	echo "\\documentclass[aspectratio=$(ASPECT),$(SIZE),$@]{beamer}" >>$(MAIN).$@.$(ASPECT).tex
 	echo "\\setbeameroption{notes on second screen}"  >>$(MAIN).$@.$(ASPECT).tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).$@.$(ASPECT).tex
-	$(LATEX) $(MAIN).$@.$(ASPECT) -outdir=$(OUTPUT)
+	$(LATEX) $(MAIN).$@.$(ASPECT) 
     
 notes: $(MAIN).tex
 	echo "\\$(INTERACTION)" >$(MAIN).notes.$(ASPECT).tex
@@ -28,17 +27,17 @@ notes: $(MAIN).tex
 	echo "\\usepackage{pgf,pgfpages}"
 	echo "\\setbeameroption{show notes}"  >>$(MAIN).notes.$(ASPECT).tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).notes.$(ASPECT).tex
-	$(LATEX) $(MAIN).notes.$(ASPECT) -outdir=$(OUTPUT)
+	$(LATEX) $(MAIN).notes.$(ASPECT)
 
 article: $(MAIN).tex
 	echo "\\$(INTERACTION)" >$(MAIN).article.tex
-	echo "\\documentclass[twocolumn]{article}" >>$(MAIN).article.tex
+	echo "\\documentclass[adobefonts]{ctexart}" >>$(MAIN).article.tex
 	echo "\\usepackage[a4paper,vmargin={22mm,22mm},hmargin={22mm,30mm}]{geometry}" >>$(MAIN).article.tex
 	echo "\\usepackage{beamerarticle,xeCJK,url,hyperref}" >>$(MAIN).article.tex
 	#echo "\\begin{CJK}" >>$(MAIN).article.tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).article.tex
 	#echo "\\end{CJK}" >>$(MAIN).article.tex
-	$(LATEX) $(MAIN).article.tex -outdir=$(OUTPUT)
+	$(LATEX) $(MAIN).article.tex
 
 pure:
 	rm -fv $(MAIN).{draft,handout,beamer,trans,second,notes}.*.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,bbl,blg,fdb\_latexmk}

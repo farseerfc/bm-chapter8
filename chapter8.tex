@@ -3,6 +3,7 @@
 
 \usepackage{fontspec,xunicode,xltxtra,beamerthemesplit,listings}
 
+\usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,shadows,mindmap,backgrounds}
 
@@ -92,6 +93,11 @@
 \providecommand{\upcite}[1]{ }
 }
 
+\mode<article>{
+\renewenvironment{columns}{\begin{multicols}{2}}{\end{multicols}\\}
+\renewenvironment{column}[1]{}{}
+}
+
 \XeTeXlinebreaklocale "jp"  
 \XeTeXlinebreakskip = 0pt plus 1pt 
 
@@ -116,22 +122,22 @@
 
 %\transwipe[direction=-90]
 
-配列や分割(Partition)とか簡単なモデルで正規テストの手法について紹介します
+配列や分割(Partition)とか簡単なモデルで正規テストの手法について紹介
 
 \begin{enumerate}
-\item 8.1節に、いろんなチェックリストで正規と半正規のテスト
-\item 8.2節に、チェックリストを分割に正規化して、簡単な網羅テストを行い \note[item]{網羅：もうら}
-\item 8.3節に、操作分布（Operation Profile, OP）という、分割のために簡単な使用ベースのテスト
-\item 8.4節に、OPを更に発展する手順
-\item 8.5節に、事例研究 \note[item]{事例研究：じれいけんきゅう}
+\item 8.1節に, いろんなチェックリストで正規と半正規のテスト
+\item 8.2節に, チェックリストを分割に正規化して, 簡単な網羅テストを行い \note[item]{網羅：もうら}
+\item 8.3節に, 操作分布（Operation Profile, OP）という, 分割のために簡単な使用ベースのテスト
+\item 8.4節に, OPを更に発展する手順
+\item 8.5節に, 事例研究 \note[item]{事例研究：じれいけんきゅう}
 \end{enumerate}
 
-第9章には、分割した入力サブドメインの境界条件のテストについて、似ているモデルを紹介します。
+第9章には, 分割した入力サブドメインの境界条件のテストについて, 似ているモデルを紹介
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{8.1 チェックリストに基づくテスト、とその制限}
+\section{8.1 チェックリストに基づくテスト, とその制限}
 \subsection{チェックリストに基づくテスト(Testing with Checklists)}
 
 \begin{frame}{Ad hocテスト \&　ランダムテスト}
@@ -144,7 +150,7 @@
 \transwipe[direction=0]<2>
 \transwipe[direction=180]<3>
 
-\mode<presentation>{
+%\mode<presentation>{
 \begin{columns}[t]
 \begin{column}{.5\textwidth}
 \only<1,3>{
@@ -171,34 +177,34 @@
 \end{columns}
 
 \begin{overprint}
-\onslide<1|handout:0|trans:0> ソフトウェアを\alert{勝手に}実行してその結果を観察
-\onslide<2|handout:0|trans:0> \alert{統計的}にランダムの分布でテストの操作を行い
-\onslide<3|handout:1|trans:1> 繰り返してAd hocテストを実行する時、試験者は行ったテストを追跡すると、チェックリストテストになった
+\onslide<1|handout:0|trans:0|article:0> ソフトウェアを\alert{勝手に}実行してその結果を観察
+\onslide<2|handout:0|trans:0|article:0> \alert{統計的}にランダムの分布でテストの操作を行い
+\onslide<3|handout:1|trans:1|article:1> 繰り返してAd hocテストを実行する時, 試験者は行ったテストを追跡すると, チェックリストテストになった
 \end{overprint}
-}
+%}
 
-\mode<article>{
-図~\ref{fig:adhoc}ソフトウェアを\alert{勝手に}実行してその結果を観察
-
-図~\ref{fig:random} \alert{統計的}にランダムの分布でテストの操作を行い
-
-繰り返してAd hocテストを実行する時、試験者は行ったテストを追跡すると、チェックリストテストになった
-
-\begin{figure}
-\begin{center}
-\label{fig:adhoc}
-\pgfuseimage{Ad-Hoc-Testing}
-\caption{Ad Hot Testing}
-\end{center}
-\end{figure}
-\begin{figure}
-\begin{center}
-\label{fig:random}
-\pgfuseimage{Random-Testing}
-\caption{Random Testing}
-\end{center}
-\end{figure}
-}
+%\mode<article>{
+%図~\ref{fig:adhoc}ソフトウェアを\alert{勝手に}実行してその結果を観察
+%
+%図~\ref{fig:random} \alert{統計的}にランダムの分布でテストの操作を行い
+%
+%繰り返してAd hocテストを実行する時, 試験者は行ったテストを追跡すると, チェックリストテストになった
+%
+%\begin{figure}
+%\begin{center}
+%\label{fig:adhoc}
+%\pgfuseimage{Ad-Hoc-Testing}
+%\caption{Ad Hot Testing}
+%\end{center}
+%\end{figure}
+%\begin{figure}
+%\begin{center}
+%\label{fig:random}
+%\pgfuseimage{Random-Testing}
+%\caption{Random Testing}
+%\end{center}
+%\end{figure}
+%}
 
 \end{frame}
 
@@ -220,7 +226,7 @@
         \item 機能チェックリスト
             \begin{itemize}
             \item システム全体から高レベルの機能
-            \item 低レベルの字句、独立な部品
+            \item 低レベルの字句, 独立な部品
             \end{itemize}
         \end{itemize}
     \item 白箱テスト
@@ -229,7 +235,7 @@
         \item コーディング標準
         \item 単体テストの文の網羅
         \item 統合テストとシステムテストの部品の網羅
-        \item 構造と特徴など、実装に関しるチェックリスト
+        \item 構造と特徴など, 実装に関しるチェックリスト
             \begin{itemize}
             \item 関数の呼び出し規則
             \item 資源の生産者と消費者
@@ -362,7 +368,7 @@
 \framesubtitle{Problems General Checklists}
 
 \begin{itemize}
-\item チェックリストの定義が抽象過ぎて、具体的にするのが難しい
+\item チェックリストの定義が抽象過ぎて, 具体的にするのが難しい
     \begin{itemize}
     \item 特に高レベル
     \end{itemize}
@@ -371,7 +377,7 @@
     \item 経験が必要
     \item 特殊な環境や設定等に依存
     \end{itemize}
-\item 大規模な、複雑なシステムに、相互接続と相互作用を定義するのも難しい 
+\item 大規模な, 複雑なシステムに, 相互接続と相互作用を定義するのも難しい 
     \note[item]{相互接続:そうごせつぞく}
     \note[item]{相互作用:そうごさよう}
 \end{itemize}
@@ -382,20 +388,20 @@
 \framesubtitle{Limitations of General Checklists}
 \transfade<2->[duration=0.5]
 \begin{enumerate}
-\item 全部の機能（黒箱テスト）又は構造部品（白箱テスト）を、異なる視点や保証レベルから、網羅することが難しい
+\item 全部の機能（黒箱テスト）又は構造部品（白箱テスト）を, 異なる視点や保証レベルから, 網羅することが難しい
     \begin{itemize}
     \item 網羅されていない穴（Hole）が残ってしまい
     \item<uncover@3-|alert@3> 分割したチェックリストを使う
     \end{itemize}
-\item より高い網羅率を着目すると、重複したテストを取り込んでしまい
+\item より高い網羅率を着目すると, 重複したテストを取り込んでしまい
     \begin{itemize}
     \item 無駄なテストを行われてしまい
     \item<uncover@3-|alert@3> 分割したチェックリストを使う
     \end{itemize}
 \item 各システムの部品間の複雑な相互作用を定義するのは難しい
     \begin{itemize}
-    \item<uncover@2-|alert@2>　10、11章にFSM基づく体系的な正規モデルを紹介
-    \note[item]{体系的:たいけいてき} \note[item]{FSM: 有限状態機械(ゆうげんじょうたいきかい)、有限オートマトン}
+    \item<uncover@2-|alert@2>　10, 11章にFSM基づく体系的な正規モデルを紹介
+    \note[item]{体系的:たいけいてき} \note[item]{FSM: 有限状態機械(ゆうげんじょうたいきかい), 有限オートマトン}
     \end{itemize}
 \end{enumerate}
 \end{frame}
@@ -453,22 +459,18 @@
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{enumerate}
-\item 分割した集合は相互に排他し、一つの要素が2つの集合に共有されていることがない
+\item 分割した集合は相互に排他し, 一つの要素が2つの集合に共有されていることがない
     \[ \forall i,j,i\neq j \Rightarrow G_i \cap G_j = \emptyset \]
-\item 分割した集合の和集合は全体の集合、和集合に分割する前に元の集合の全てが含まれている
+\item 分割した集合の和集合は全体の集合, 和集合に分割する前に元の集合の全てが含まれている
     \[ \bigcup_{i=1}^{n} G_i = S \]
 \end{enumerate}
 
 \end{column}
 \begin{column}{0.5\textwidth}
-分割した集合は同値類になる。
-
-同値関係を持つには
-\begin{enumerate}
-\item 反射率 \\ $R(a,a)$ が常に成り立つ
-\item 対称律 \\ $R(a,b) \Rightarrow R(b,a) $
-\item 推移律 \\ $R(a,b) \wedge R(b,c) \Rightarrow R(a,c)$
-\end{enumerate}
+分割した集合は同値類になる
+\begin{block}{対称律(symmetric)} $R(a,b) \Rightarrow R(b,a) $ \end{block}
+\begin{block}{推移律(transitive)} $R(a,b) \wedge R(b,c) \Rightarrow R(a,c)$ \end{block}
+\begin{block}{反射律(reflexive)} $R(a,a)$ が常に成り立つ \end{block}
 \end{column}
 \end{columns}
 \end{frame}
@@ -476,7 +478,9 @@
 \subsection{8.2.3 分割テストの決定と網羅範囲の予測}
 \begin{frame}{分割テストの網羅範囲の決定}
 \framesubtitle{Testing Decisions for Partition Coverage}
-分割テストは一種のチェックリストであり、分割の種類は8.1節に述べたチェックリストの種類に似ている。但し、分割の決定は以下のとおりに決められている
+分割テストは一種のチェックリストであり, 分割の種類は8.1節に
+述べたチェックリストの種類に似ている. 
+但し, 分割の決定は以下のとおりに決められている
 \begin{enumerate}
 \item 製品実体によって分割
     \begin{itemize}
@@ -484,7 +488,7 @@
     \item<uncover@2-|alert@2>
     チェックリストと同じ
     \end{itemize}
-\item 性質、関係、論理的な条件によって分割、更に2つに分かれている
+\item 性質, 関係, 論理的な条件によって分割, 更に2つに分かれている
     \begin{itemize}
     \item 論理変数を論理演算子に結ばれた論理述語による \note[item]{述語:じゅつご}
     \item 数字変数を比較演算子によって比較する
@@ -559,7 +563,7 @@ child {
 \only<1|handout:0|trans:0|article:0>{一貫性がない決定木}
 \only<2|handout:1|trans:1|article:1>{一貫性を持つ決定木}
 
-\uncover<2>{決定木の上、一つの結果は一つの分割方法となって、パスを沿って結果を成り立たせる入力の範囲を求める}
+\uncover<2>{決定木の上, 一つの結果は一つの分割方法となって, パスを沿って結果を成り立たせる入力の範囲を求める}
 \end{column}
 
 \begin{column}{0.5\textwidth}
@@ -610,12 +614,12 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \begin{column}{0.6\textwidth}
 \only<4->{
 \begin{enumerate}
-\item 使用シナリオ、パターン、関連する使用頻度を、目標消費者やユーザーから収集
-\item 収集した情報を分析し、操作分布（OP, Operation Profile）に整理
+\item 使用シナリオ, パターン, 関連する使用頻度を, 目標消費者やユーザーから収集
+\item 収集した情報を分析し, 操作分布（OP, Operation Profile）に整理
 \item 操作分布によってテストを行い
-\item テストの結果を分析し、製品の信頼性を評価し、テストのフィードバックやソフトウェア開発プロセスに役立つ
+\item テストの結果を分析し, 製品の信頼性を評価し, テストのフィードバックやソフトウェア開発プロセスに役立つ
     \begin{itemize}
-    \item<uncover@5-> 製品の信頼性を評価する方法は22章に紹介する、他のテストに関係する活動は7章に紹介した
+    \item<uncover@5-> 製品の信頼性を評価する方法は22章に紹介する, 他のテストに関係する活動は7章に紹介した
     \end{itemize}
 \end{enumerate}
 }
@@ -647,9 +651,11 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \begin{frame}[shrink=10]{Musa操作分布:基本的な考え方（定義）}
 \framesubtitle{Musa OP:Basic Ideas(Defination)}
 \begin{definationfc}[操作分布]
-操作分布とは、一連の操作とそれらの出現に関連する確率の配列 
+操作分布とは, 一連の操作とそれらの出現
+に関連する確率の配列 
 
-An operational profile is a list of disjoint set of operations and their associated probabilities of occurrence
+An operational profile is a list of disjoint set of operations
+and their associated probabilities of occurrence
 
 \flushright{---\cite{musa1993operational}}
 \end{definationfc}
@@ -687,8 +693,8 @@ An operational profile is a list of disjoint set of operations and their associa
 
 \note[item]{使用確率によってsortする必要は限られていない}
 \note[item]{使用確率の分布が均一（きんいつ）とは限られていない}
-\note[item]{均一（きんいつ）とは限られていないから、閾値を決めてフィルタリングすることが可能}
-\note[item]{具体的に、操作分布はチェックリストでもあるし、分割でもあり。}
+\note[item]{均一（きんいつ）とは限られていないから, 閾値を決めてフィルタリングすることが可能}
+\note[item]{具体的に, 操作分布はチェックリストでもあるし, 分割でもあり}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -748,13 +754,13 @@ An operational profile is a list of disjoint set of operations and their associa
 \begin{frame}{他に操作分布の使う目的}
 \framesubtitle{OPs Used in Other Situations for Various Purpose}
 \begin{itemize}
-\item 進捗テストによって、ソフトウェアの信頼性目標に達成するまで予測
+\item 進捗テストによって, ソフトウェアの信頼性目標に達成するまで予測
     \note[item]{信頼性目標の予測を22章に紹介する}
 \item 開発効率の向上
     \note[item]{あんまり使われていない部分のテストを防いだ}
-    \note[item]{AT\&Tで行われた実験のデータによると、
+    \note[item]{AT\&Tで行われた実験のデータによると, 
     56\%のシステム・テスト・コストと11.5\%の全体のコストを削減（さくげん）した}
-\item よく使われる機能を特定し、それに着目して新しい機能や製品を開発
+\item よく使われる機能を特定し, それに着目して新しい機能や製品を開発
     \begin{itemize}
     \item あまり使われていない機能は後で
     \item 螺旋(spiral)開発やプロトタイプ開発などのプロセスに使える
@@ -769,16 +775,16 @@ An operational profile is a list of disjoint set of operations and their associa
     \begin{itemize}
     \item 線形に近いコストの成長率
     \end{itemize}
-    \note[item]{AT\&Tのデータによると、普通の製品に対すOP開発コストは1人月。}
-    \note[item]{普通の定義は10万行、10人の開発者で一年半}
+    \note[item]{AT\&Tのデータによると, 普通の製品に対すOP開発コストは1人月}
+    \note[item]{普通の定義は10万行, 10人の開発者で一年半}
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{8.4 操作分布を作成(Constructing Operational Profiles)}
-\subsection{8.4.1 一般的な方法と参加者(Generic methods and participants)}
-\begin{frame}{単一の操作分布か？多数の操作分布か？}
+\subsection{8.4.1 一般的な方法と参加者}
+\begin{frame}{単一の操作分布？多数の操作分布？}
 \framesubtitle{Single Operational Profiles? Multiple Operational Profiles?}
-ユーザの使用型によって
+ユーザーの使用型によって
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.5\textheight}}
 \pgfdeclareimage[height=\imageheight]{user}{figure/user.jpg}
@@ -821,6 +827,17 @@ An operational profile is a list of disjoint set of operations and their associa
 \framesubtitle{Generic Participants}
 \begin{columns}
 \begin{column}{0.5\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7,drop shadow}]
+  \path[mindmap,concept color=black,text=white]
+    node[concept] {Test Planner} [clockwise from=180]
+    child[concept color=blue] { node[concept] {Customers}}
+    child[concept color=red] { node[concept] {System Engineer} }
+    child[concept color=orange] { node[concept] {High-level Designer} };
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
 \begin{itemize}
 \item 計画やマーケティング担当者
     \begin{itemize}
@@ -837,17 +854,121 @@ An operational profile is a list of disjoint set of operations and their associa
     \end{itemize}
 \end{itemize}
 \end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.4.2 Musa-1操作分布の開発過程}
+\begin{frame}{Musa-1操作分布の開発過程}
+\framesubtitle{OP development procedure: Musa-1}
+\begin{definationfc}[Musa-1]
+トップダウン手法, 同じ重要なユーザーグループに対して多数の操作分布
+\end{definationfc}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Musa-1の手法で操作分布を得る手順}
+\framesubtitle{Steps to develop OP, Musa-1}
+\transwipe<2->[direction=180]
+
+
+\only<1>{ 1. 全種類の顧客を使用の要因に重み付けて, 顧客の分布を探し}
+\only<2>{ 2. 一種の顧客の中関連するユーザーの型と彼らの相対使用率を定義し, 
+    ユーザーの分布を提示}
+    \note<2>{顧客とユーザーの区別は, 顧客は製品を買う人, 
+        ユーザーは製品を使う人}
+\only<3>{ 3. 通常に使用される操作とそれの重みを見つけ,システムモード
+    と関連分布を定義}
+\only<4>{ 4. システムモードを分析し, 高レベルの機能とその関連分布を決定}
+\only<5>{ 5. 細かい機能の使用率を決定}
+
+\begin{columns}
+\only<1,2>{
 \begin{column}{0.5\textwidth}
 \begin{center}
-\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7,drop shadow}]
-  \path[mindmap,concept color=black,text=white]
-    node[concept] {Test Planner} [clockwise from=180]
-    child[concept color=blue] { node[concept] {Customers}}
-    child[concept color=red] { node[concept] {System Engineer} }
-    child[concept color=orange] { node[concept] {High-level Designer} };
-\end{tikzpicture}
+\mode<article>{\renewcommand{\imageheight}{0.07\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.2\textheight}}
+\includegraphics[height=\imageheight]{figure/goverment.png}
+
+\includegraphics[height=\imageheight]{figure/corporate.jpg}
+
+\includegraphics[height=\imageheight]{figure/education.jpg}
 \end{center}
 \end{column}
+}
+
+\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\renewcommand{\imageheight}{0.6\textheight}}
+
+\only<2,3>{
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[height=\imageheight]{figure/orgchart.jpg}
+\end{center}
+\end{column}
+}
+
+\only<3,4>{
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[height=\imageheight]{figure/shifter.jpg}
+\end{center}
+\end{column}
+}
+
+\only<4,5>{
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[height=\imageheight]{figure/operations.jpg}
+\end{center}
+\end{column}
+}
+
+\only<5>{
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[height=\imageheight]{figure/function.png}
+\end{center}
+\end{column}
+}
+
 \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Musa-1:例}
+\framesubtitle{Sample for Musa-1}
+\begin{figure}
+\subfloat[顧客操作分布の例]{\includegraphics[height=\imageheight]{figure/samplecustomerprofile.png}}
+\subfloat[ユーザー操作分布の例]{\includegraphics[height=\imageheight]{figure/sampleuserprofile.png}}
+\caption{操作分布をMusa-1で開発する例}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{一貫性がある操作分布の計算}
+\framesubtitle{Calculate Profile for Uniform Operational Stages}
+もし一つの操作が二つの段階（A, B）に分かれて, それぞれの分布
+\[p_i=prob(A=A_i)\]
+\[p_j=prob(B=B_j)\]
+
+操作全体の分布
+
+\[p_{ij}=prob(A=A_i,B=B_j)=p_i \times p_j\]
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.4.3 Musa-2操作分布の開発過程}
+\begin{frame}{Musa-2操作分布の開発過程}
+\framesubtitle{OP development procedure: Musa-2}
+\begin{definationfc}[Musa-2]
+一つユーザーに対して単一な操作分布
+
+もっと小さいデータソースに適用
+\end{definationfc}
+
+\pause
+
+\begin{enumerate}
+\item
+\end{enumerate}
+
 \end{frame}
 \end{document}
