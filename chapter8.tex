@@ -4,7 +4,7 @@
 \usepackage{fontspec,xunicode,xltxtra,beamerthemesplit,listings}
 
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows,shadows,mindmap,backgrounds}
 
 \usetheme{Warsaw} 
 \useoutertheme{infolines}
@@ -752,9 +752,8 @@ An operational profile is a list of disjoint set of operations and their associa
     \note[item]{信頼性目標の予測を22章に紹介する}
 \item 開発効率の向上
     \note[item]{あんまり使われていない部分のテストを防いだ}
-    \begin{itemize}
-    \item AT\&Tで行われた実験のデータによると、56\%のシステム・テスト・コストと11.5\%の全体のコストを削減（さくげん）した
-    \end{itemize}
+    \note[item]{AT\&Tで行われた実験のデータによると、
+    56\%のシステム・テスト・コストと11.5\%の全体のコストを削減（さくげん）した}
 \item よく使われる機能を特定し、それに着目して新しい機能や製品を開発
     \begin{itemize}
     \item あまり使われていない機能は後で
@@ -775,7 +774,7 @@ An operational profile is a list of disjoint set of operations and their associa
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.4 操作分布を構築(Constructing Operational Profiles)}
+\section{8.4 操作分布を作成(Constructing Operational Profiles)}
 \subsection{8.4.1 一般的な方法と参加者(Generic methods and participants)}
 \begin{frame}{単一の操作分布か？多数の操作分布か？}
 \framesubtitle{Single Operational Profiles? Multiple Operational Profiles?}
@@ -793,6 +792,60 @@ An operational profile is a list of disjoint set of operations and their associa
 \begin{column}{0.5\textwidth}
 \begin{center}
 \pgfuseimage{stakeholders}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{一般的な方法}
+\framesubtitle{Generic Methods}
+\begin{itemize}
+\item 実際に顧客のインストールで使用量の測定
+    \begin{itemize}
+    \item 最も精度が高い
+    \item 新製品に既存のインストールがない
+    \item 顧客のプライバシーに問題がある
+    \end{itemize}
+\item 顧客を調査（survey）
+    \begin{itemize}
+    \item 精度は専門家の意見より高い
+    \end{itemize}
+\item 専門家の意見や既存の製品に基づいて使用量を予測
+    \begin{itemize}
+    \item コストは最も低い
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{一般的な参加者}
+\framesubtitle{Generic Participants}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item 計画やマーケティング担当者
+    \begin{itemize}
+    \item 顧客との主要な接触
+    \item 顧客の懸念とその視点が再されていることを確認
+    \end{itemize}
+\item システムエンジニア
+    \begin{itemize}
+    \item 製品に実装される高レベルの機能を含む製品全体の要件と仕様
+    \end{itemize}
+\item ハイレベルデザイナー
+    \begin{itemize}
+    \item 仕様に従う高レベルの製品設計を生成
+    \end{itemize}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7,drop shadow}]
+  \path[mindmap,concept color=black,text=white]
+    node[concept] {Test Planner} [clockwise from=180]
+    child[concept color=blue] { node[concept] {Customers}}
+    child[concept color=red] { node[concept] {System Engineer} }
+    child[concept color=orange] { node[concept] {High-level Designer} };
+\end{tikzpicture}
 \end{center}
 \end{column}
 \end{columns}

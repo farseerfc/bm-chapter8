@@ -1,35 +1,44 @@
 default: beamer
 
+INTERACTION=errorstopmode
 SIZE=14pt
 ASPECT=169
 MAIN=chapter8
-LATEX=latexmk -xelatex
+LATEX=latexmk -xelatex 
+OUTPUT=.
 
-OBJS=beamer handout trans draft
+OBJS=beamer trans handout 
 
 all: $(OBJS) article notes
 
+dist:
+	mkdir -p output
+	cp *.pdf output/
+
 $(OBJS): $(MAIN).tex
-	echo "\\documentclass[CJK,aspectratio=$(ASPECT),$(SIZE),$@]{beamer}" >$(MAIN).$@.$(ASPECT).tex
-	echo "\\setbeameroption{show notes on second screen}"  >>$(MAIN).notes.$(ASPECT).tex
+	echo "\\$(INTERACTION)" >$(MAIN).$@.$(ASPECT).tex
+	echo "\\documentclass[aspectratio=$(ASPECT),$(SIZE),$@]{beamer}" >>$(MAIN).$@.$(ASPECT).tex
+	echo "\\setbeameroption{notes on second screen}"  >>$(MAIN).$@.$(ASPECT).tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).$@.$(ASPECT).tex
-	$(LATEX) $(MAIN).$@.$(ASPECT)
+	$(LATEX) $(MAIN).$@.$(ASPECT) -outdir=$(OUTPUT)
     
 notes: $(MAIN).tex
-	echo "\\documentclass[CJK,aspectratio=$(ASPECT),$(SIZE),handout]{beamer}" >$(MAIN).notes.$(ASPECT).tex
+	echo "\\$(INTERACTION)" >$(MAIN).notes.$(ASPECT).tex
+	echo "\\documentclass[aspectratio=$(ASPECT),$(SIZE),handout]{beamer}" >>$(MAIN).notes.$(ASPECT).tex
 	echo "\\usepackage{pgf,pgfpages}"
 	echo "\\setbeameroption{show notes}"  >>$(MAIN).notes.$(ASPECT).tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).notes.$(ASPECT).tex
-	$(LATEX) $(MAIN).notes.$(ASPECT)
+	$(LATEX) $(MAIN).notes.$(ASPECT) -outdir=$(OUTPUT)
 
 article: $(MAIN).tex
-	echo "\\documentclass[CJK,twocolumn]{article}" >$(MAIN).article.tex
+	echo "\\$(INTERACTION)" >$(MAIN).article.tex
+	echo "\\documentclass[twocolumn]{article}" >>$(MAIN).article.tex
 	echo "\\usepackage[a4paper,vmargin={22mm,22mm},hmargin={22mm,30mm}]{geometry}" >>$(MAIN).article.tex
-	echo "\\usepackage{beamerarticle,xeCJK}" >>$(MAIN).article.tex
+	echo "\\usepackage{beamerarticle,xeCJK,url,hyperref}" >>$(MAIN).article.tex
 	#echo "\\begin{CJK}" >>$(MAIN).article.tex
 	echo "\\input{$(MAIN).tex}" >>$(MAIN).article.tex
 	#echo "\\end{CJK}" >>$(MAIN).article.tex
-	$(LATEX) $(MAIN).article.tex
+	$(LATEX) $(MAIN).article.tex -outdir=$(OUTPUT)
 
 pure:
 	rm -fv $(MAIN).{draft,handout,beamer,trans,second,notes}.*.{tex,aux,log,nav,out,snm,toc,tex,vrb,fls,bbl,blg,fdb\_latexmk}
