@@ -110,7 +110,7 @@
 
 
 \AtBeginSubsection[]{
-  \begin{frame}<trans|beamer>[shrink=25]{小節目次}
+  \begin{frame}<trans|beamer>[shrink=25]{目次}
     \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] 
   \end{frame}
 }
@@ -591,7 +591,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{8.3 Musa氏の操作プロフィールで使用ベース統計的テスト}
 \subsection{8.3.1 使用ベース統計的テストの場合}
-\begin{frame}[shrink=13]{使用ベース統計的テストが適用する場合(p111)}
+\begin{frame}[shrink=13]{使用ベース統計的テスト適用場合(p111)}
 \framesubtitle{The Cases for Usage-based Statistical Testing}
 \transwipe<2->
 
@@ -630,7 +630,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{操作プロフィールを開発プロセスに導入時期(p111)}
+\begin{frame}{OPを開発プロセスに導入時期(p111)}
 \framesubtitle{The Period of Development Process that Involves Operational Profiles}
 \transfade<2->[duration=0.5]
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
@@ -651,7 +651,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.2 Musa操作プロフィール:基本的な考え方(Musa OP:Basic Ideas)}
-\begin{frame}[shrink=10]{Musa氏よる操作プロフィールの定義(p112)}
+\begin{frame}[shrink=10]{MusaよるOPの定義(p112)}
 \framesubtitle{Musa OP:Basic Ideas(Defination)}
 \begin{definationfc}[操作プロフィール]
 操作プロフィールとは, 一連の操作とそれらの出現
@@ -668,7 +668,8 @@ and their associated probabilities of occurrence
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[shrink=10]{Musa操作プロフィール:基本的な考え方(p113)}
+\begin{frame}[shrink=10]{Musa OP:基本的な考え方(p113)}
+\label{frame:basicideas}
 \framesubtitle{Musa OP:Basic Ideas(Example)}
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.6\textheight}}
@@ -991,7 +992,7 @@ and their associated probabilities of occurrence
 \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{一貫性がある操作プロフィールの計算(p119)}
+\begin{frame}{一貫性があるOPの計算(p119)}
 \framesubtitle{Calculate Profile for Uniform Operational Stages}
 もし一つの操作が二つの段階（A, B）に分かれて, それぞれのプロフィール
 \[p_i=prob(A=A_i)\]
@@ -1003,7 +1004,7 @@ and their associated probabilities of occurrence
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.4.3 Musa-2操作プロフィールの開発過程}
-\begin{frame}{Musa-2操作プロフィールの開発過程(p120)}
+\begin{frame}{Musa-2 OPの開発過程(p120)}
 \framesubtitle{OP development procedure: Musa-2}
 \begin{definationfc}[Musa-2]
 一つユーザーに対して単一な操作プロフィール
@@ -1012,10 +1013,26 @@ and their associated probabilities of occurrence
 \end{definationfc}
 
 \pause
-
 \begin{enumerate}
-\item
+\item 操作のイニシエータ（initiator）を見付け
+\item 表現の形式を決定：\alert<3->{表か図か}
+\item 操作配列
+\item 発生率の測定形を決め：時間の単位
+\item 発生の可能性を決め
 \end{enumerate}
-
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{表現の形式：表(p120)}
+\framesubtitle{Representation: Tabular}
+\begin{center}
+\includegraphics[width=0.8\textwidth,page=51]{figure/include.pdf}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{表現の形式：図(p121)}
+\framesubtitle{Representation: Graphical}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{figure/graphical.png}
+\end{center}
 \end{frame}
 \end{document}
