@@ -1064,14 +1064,26 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 Lockheed Martin戦術航空機(Tactical Aircraft)\note{航空機：こうくうき}
 会社(LMTAS)が開発した, 航空機要員に使われて, 任務の計画の媒介を交換するの
 支援システム(Cartridge Support Software, CSS)
+
+\begin{columns}
+\begin{column}{0.6\textwidth}
 \begin{center}
 \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSS.png}
 \end{center}
-\note[item]{パイロットは媒介を使って、航空機に乗せているコンピューターに
-データをアップロードする。パソコンで任務の計画をロートできるという能力は
-タイロットにとって非常に大事、それがないと、パイロットは複雑なコントロール・パネル
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSSdialog.png}
+\end{center}
+\end{column}
+\end{columns}
+
+\note[item]{航空機要員は媒介を使って、航空機に乗せているコンピューターに
+データをアップロードする。航空機要員で任務の計画をロートできるという能力は
+パイロットにとって非常に大事、それがないと、パイロットは複雑なコントロール・パネル
 で必死に様々なデータを設定しなければならない。CSSを使ったら、パソコンをGUIから、
-パイロットは任務の計画を立つ操作は簡単に、効率的になる。}
+航空機要員は任務の計画を立つ操作は簡単に、効率的になる。}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{CSSのOPを開発する参加者(p122)}
@@ -1108,6 +1120,162 @@ K.~Chruscielski and J.~Tian, ``An operational profile for the cartridge support
 \note[item]{レポートを書いた二人はSMU(南メソジスト大学)に
     「ソフトウェアテストと品質保証」を教える先生。}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.5.2 五つのステップでOP開発}
+\begin{frame}{Step 1\&2: 顧客とユーザー(p122)}
+\framesubtitle{Step 1\&2: Customers \& Users}
+CSSの顧客は空軍\note[item]{空軍：くうぐん}
+\note[item]{内部顧客：航空機システムテスト者、飛行テスト者もいるが、
+    基本の操作は一緒ですから、区別しない、重みをつけない}
+\begin{overlayarea}{\textwidth}{0.7\textheight}
+\only<1>{
+    \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{figure/CSScustomer.png}
+    \end{center}
+}
+\only<2->{
+\transfade[duration=0.1]
+ユーザーの型は
+\begin{overlayarea}{\textwidth}{0.6\textheight}
+\only<2>{
+\begin{enumerate}
+\item 空軍のパイロット
+    \note[item]{パイロット：直接に関係する人、あんまり操作しない}
+\item 飛行テスト支援者
+    \note[item]{Flight Test Support: 任務計画中にCSSを使う人}
+\item 航空機システムテスト者
+    \note[item]{航空機の中の全部載せているパソコンを管理、設置する人}
+\item システム管理者
+    \note[item]{この機能はパイロットに実行しているから、パイロットに合併する}
+\end{enumerate}
+}
+\only<3>{
+    \begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth,height=\imageheight,keepaspectratio]{figure/CSSuser.png}
+    \caption{CSSユーザー・プロフィール}
+    \end{center}
+    \end{figure}
+}
+\end{overlayarea}
+}
+\end{overlayarea}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Step 3: システム・モード(p123)}
+\framesubtitle{Step 3: System Modes}
+CSSに見つけたシステム・モードは三種類に分かれています：
+\begin{enumerate}
+\item 飛行前の任務計画
+\item 航空機システムテスト
+\item システム管理
+\end{enumerate}
+操作分析によると, この三つは区別しない。
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Step 4\&5: 機能と操作(p123)}
+\framesubtitle{Step 4\&5: High-level functions and low-level operations}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/CSSflow.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{パイロットのOP}
+\framesubtitle{OP: Pilot}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/OPpilot.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{飛行テスト支援者のOP}
+\framesubtitle{OP: Flight Test Support}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/OPfts.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{システム・テスト者のOP}
+\framesubtitle{OP: System Test}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/OPst.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{全部のOP}
+\framesubtitle{OP: Comprehensive}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/OPcompre.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{CSS使用率よる機能の分類(p124)}
+\framesubtitle{CSS functions classified according to usage probabilities}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{figure/CSSfunctions.png}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{8.5 メトリック収集, 結果検証, 経験}
+\begin{frame}{メトリックを収集(p124)}
+\framesubtitle{Metrics collections}
+\begin{enumerate}
+\item SPMに製品の市場を把握する
+    \begin{itemize}
+    \item 何週間に短いインタビュー
+    \end{itemize}
+\item SPMと議論し、ユーザープロフィールと機能プロフィールの要求を定義
+    \begin{itemize}
+    \item 既存のCSSの機能設計は役に立った
+    \end{itemize}
+\item System Engineers と Test Engineers の経験から、ユーザー調査書を作った
+\item メールでのユーザー調査
+\item 結果操作プロフィールの解釈
+    \begin{itemize}
+    \item 前の図と表で表す
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{結果を検証(p125)}
+\framesubtitle{Result Validation}
+意外の結果を解釈中に出た
+\begin{itemize}
+\item ホットキーの使用はMedium-low
+    \begin{itemize}
+    \item ユーザーは既存のホットキーを依存
+    \end{itemize}
+\item ヘルプ機能はMedium-low
+    \begin{itemize}
+    \item ユーザーはシステムにもっと詳しいと思った
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{8.6 まどめ}
+\subsection{8.6 まどめ}
+\begin{frame}{まどめ(p125)}
+\framesubtitle{Concluding Remarks}
+\begin{enumerate}
+\item チェックリスト・テスト, とそれの制限を紹介した
+\item 分割に基づくテストモデルを紹介した
+    \begin{itemize}
+    \item 9章に入力ドメインによる分割と境界テストを紹介する
+    \end{itemize}
+\item Musaによる操作プロフィール(OP)を紹介した
+    \begin{itemize}
+    \item Musa-1 多数OP
+    \item Musa-2 単一OP
+    \item CSSの事例
+    \end{itemize}
+\end{enumerate}
+もっと複雑のプログラムに使うFSMに基づくモデルを10, 11章に紹介する
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \backupbegin
