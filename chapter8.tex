@@ -17,7 +17,18 @@
 
 \usepackage[overlap,CJK]{ruby}
 \usepackage{multicol}
-\usepackage[sort&compress]{natbib}
+%\usepackage[sort&compress]{natbib}
+%\usepackage{chapterbib}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+
 
 
 \setmainfont{MS PGothic}
@@ -90,7 +101,6 @@
 \providecommand{\midrule}{\hline}
 \providecommand{\bottomrule}{\hline}
 \providecommand{\itemtitle}[1]{\item \alert{#1} \quad{} }
-\providecommand{\upcite}[1]{ }
 }
 
 \mode<article>{
@@ -122,14 +132,15 @@
 
 %\transwipe[direction=-90]
 
-チェックリストや分割(Partition)とか簡単なモデルで正規テストの手法について紹介
+チェックリストや分割(Partition)等簡単なモデルで正規テストの手法について紹介
 
 \begin{enumerate}
-\item 8.1節, いろんなチェックリストで正規と半正規のテスト
-\item 8.2節, チェックリストを分割に正規化して, 簡単な網羅テストを行い \note[item]{網羅：もうら}
-\item 8.3節, 操作プロフィール（Operation Profile, OP）という, 分割のために簡単な使用ベースのテスト
-\item 8.4節, OPを更に発展する手順
-\item 8.5節, 事例研究 \note[item]{事例研究：じれいけんきゅう}
+\item 8.1節, 様々なチェックリストで正規と半正規のテスト
+\item 8.2節, チェックリストを分割に正規化して, 簡単なカバレッジテストを行い
+\item 8.3節, 操作プロフィール（Operation Profile, OP）という,
+    分割のために簡単なUBT(Usage-based Testing)を紹介
+\item 8.4節, OPを生成する手順
+\item 8.5節, Case Study
 \end{enumerate}
 
 第9章には, 分割した入力サブドメインの境界条件のテストについて, 似ているモデルを紹介
@@ -178,7 +189,8 @@
 
 \begin{overprint}
 \onslide<1|handout:0|trans:0|article:0> ソフトウェアを\alert{勝手に}実行してその結果を観察
-\onslide<2|handout:0|trans:0|article:0> \alert{統計的}にランダムのプロフィールでテストの操作を行い
+\onslide<2|handout:0|trans:0|article:0>
+\alert{統計的}にランダムのプロフィールでテストの操作を行う
 \onslide<3|handout:1|trans:1|article:1> 繰り返してAd hocテストを実行する時,
     テスト者は行ったテストを追跡すると, チェックリストテストになる
 \end{overprint}
@@ -226,8 +238,8 @@
         \item ソフトウェア要求チェックリスト
         \item 機能チェックリスト
             \begin{itemize}
-            \item システム全体から高レベルの機能
-            \item 低レベルの字句, 独立な部品
+            \item システム全体からハイレベルの機能
+            \item ローレベルの字句, 独立な部品
             \end{itemize}
         \end{itemize}
     \item ホワイトボックステスト(WBT)
@@ -264,14 +276,13 @@
 \subsection{階層及び複合チェックリスト(Hierarchical and Combined Checklists)}
 \begin{frame}{階層チェックリスト(p105)}
 \framesubtitle{Hierarchical Checklists }
-\note[item]{階層：かいそう}
 \begin{columns}
     \begin{column}{0.35\textwidth}
     \flushright{
     \begin{enumerate}
-    \item 高レベル項目1
-    \item 高レベル項目2
-    \item 高レベル項目3
+    \item ハイレベル項目1
+    \item ハイレベル項目2
+    \item ハイレベル項目3
     \end{enumerate}
     }
     \end{column}
@@ -280,22 +291,22 @@
     \end{column}
     \begin{column}{0.5\textwidth}
     \begin{enumerate}
-    \item 高レベル項目1
+    \item ハイレベル項目1
         \begin{enumerate}
-        \item 低レベル項目1
-        \item 低レベル項目2
-        \item 低レベル項目3
+        \item ローレベル項目1
+        \item ローレベル項目2
+        \item ローレベル項目3
         \end{enumerate}
-    \item 高レベル項目2
+    \item ハイレベル項目2
         \begin{enumerate}
-        \item 低レベル項目4
-        \item 低レベル項目5
+        \item ローレベル項目4
+        \item ローレベル項目5
         \end{enumerate}
-    \item 高レベル項目3
+    \item ハイレベル項目3
         \begin{enumerate}
-        \item 低レベル項目6
-        \item 低レベル項目7
-        \item 低レベル項目8
+        \item ローレベル項目6
+        \item ローレベル項目7
+        \item ローレベル項目8
         \end{enumerate}
     \end{enumerate}
     \end{column}
@@ -304,8 +315,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[shrink=5]{複合チェックリスト(p105)}
 \framesubtitle{Combined Checklists}
-
-\note[item]{複合：ふくごう}
 \pgfdeclareimage[height=\imageheight]{2dchecklist}{figure/2dchecklist.png}
 \transfade<2->[duration=0.5]
 
@@ -369,16 +378,16 @@
 \framesubtitle{Problems General Checklists}
 
 \begin{itemize}
-\item チェックリストの定義が抽象過ぎて, 具体的にするのが難しい
+\item チェックリストの定義が抽象的過ぎて, 具体的にするのが難しい
     \begin{itemize}
-    \item 特に高レベル
+    \item 特にハイレベル
     \end{itemize}
 \item 具体的なテストケースに変換するのは
     \begin{itemize}
     \item 経験が必要
     \item 特殊な環境や設定等に依存
     \end{itemize}
-\item 大規模な, 複雑なシステムに, 相互接続と相互作用を定義するのも難しい 
+\item 大規模で, 複雑なシステムに, 相互接続と相互作用を定義するのも難しい 
     \note[item]{相互接続:そうごせつぞく}
     \note[item]{相互作用:そうごさよう}
 \end{itemize}
@@ -389,35 +398,37 @@
 \framesubtitle{Limitations of General Checklists}
 \transfade<2->[duration=0.5]
 \begin{enumerate}
-\item 全部の機能（ブラックボックステスト）又は構造部品（ホワイトボックステスト）を, 異なる視点や保証レベルから, 網羅することが難しい
+\item 全部の機能（ブラックボックステスト）又は構造部品
+（ホワイトボックステスト）を, 異なる視点や保証レベルから, 
+網羅することが難しい
     \begin{itemize}
-    \item 網羅されていない穴（Hole）が残ってしまい
+    \item 網羅されていない穴（Hole）が残ってしまう
     \item<uncover@3-|alert@3> 分割したチェックリストを使う
     \end{itemize}
-\item より高い網羅率を着目すると, 重複したテストを取り込んでしまい
+\item より高い網羅率を目標にすると, テストを重複でしまう
     \begin{itemize}
-    \item 無駄なテストを行われてしまい
+    \item 無駄なテストを行われてしまう
     \item<uncover@3-|alert@3> 分割したチェックリストを使う
     \end{itemize}
 \item 各システムの部品間の複雑な相互作用を定義するのは難しい
     \begin{itemize}
-    \item<uncover@2-|alert@2>　10, 11章にFSM基づく体系的な正規モデルを紹介
+    \item<uncover@2-|alert@2>　10, 11章にFSMに基づく体系的な正規モデルを紹介
     \note[item]{体系的:たいけいてき} \note[item]{FSM: 有限状態機械(ゆうげんじょうたいきかい), 有限オートマトン}
     \end{itemize}
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.2 分割網羅テスト（Testing for Partition Coverage）}
+\section{8.2 分割カバレッジテスト（Testing for Partition Coverage）}
 \subsection{紹介}
-\begin{frame}{分割網羅テスト(p107)}
+\begin{frame}{分割カバレッジテスト(p107)}
 \framesubtitle{Testing for Partition Coverage}
 \begin{itemize}
-\item 分割と分割を基づくテストは一種のチェックリスト・テスト
+\item 分割を基づくテストは一種のチェックリスト・テスト
 \item 分割は集合全体を徹底的に覆う　\note[item]{覆う:おおう} \note[item]{徹底的：てっていてき}
     \begin{itemize}
     \item より高い\alert{網羅率}
     \end{itemize}
-\item 分割はお互いに重複ことができない
+\item 分割はお互いに重複することができない
     \begin{itemize}
     \item より高い\alert{効率}
     \end{itemize}
@@ -460,10 +471,12 @@
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{enumerate}
-\item 分割した集合は相互に排他し, 一つの要素が2つの集合に共有されていることがない
+\item 分割した集合は相互に排他的
+\note[item]{要素が2つの集合に共有されていることがない}
     \[ \forall i,j,i\neq j \Rightarrow G_i \cap G_j = \emptyset \]
 \pause
-\item 分割した集合の和集合は全体の集合, 和集合に分割する前に元の集合の全てが含まれている
+\item 分割した集合の和集合は全体の集合
+\note[item]{和集合に分割する前に元の集合の全てが含まれている}
     \[ \bigcup_{i=1}^{n} G_i = S \]
 \end{enumerate}
 
@@ -485,16 +498,16 @@
 述べたチェックリストの種類に似ている. 
 但し, 分割の決定は以下のとおりに決められている
 \begin{enumerate}
-\item 製品実体によって分割
+\item 製品によって分割
     \begin{itemize}
-    \item 例えば外部関数（ブラックボックス視点）又はシステム部品（ホワイトボックス視点）
+    \item 例えば外部関数（BBT視点）又はシステム部品（WBT視点）
     \item<uncover@2-|alert@2>
     チェックリストと同じ
     \end{itemize}
 \item 性質, 関係, 論理的な条件によって分割, 更に2つに分かれている
     \begin{itemize}
-    \item 論理変数を論理演算子に結ばれた論理述語による \note[item]{述語:じゅつご}
-    \item 数字変数を比較演算子によって比較する
+    \item 論理変数を論理演算子に繋がれる論理述語による \note[item]{述語:じゅつご}
+    \item 数的な変数を比較演算子によって比較する
     \item<uncover@3-|alert@3>
     論理述語や比較演算によって入力区間を分割
     \item<uncover@4-|alert@4>
@@ -566,7 +579,7 @@ child {
 \only<1|handout:0|trans:0|article:0>{一貫性がない決定木}
 \only<2|handout:1|trans:1|article:1>{一貫性を持つ決定木}
 
-\uncover<2>{決定木の上, 一つの結果は一つの分割方法となって, パスを沿って結果を成り立たせる入力の範囲を求める}
+\uncover<2>{決定木によって, 一つの結果は一つの分割方法となって, パスを沿って結果を成り立たせる入力の範囲を求める}
 \end{column}
 
 \begin{column}{0.5\textwidth}
@@ -590,8 +603,8 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{8.3 Musa氏の操作プロフィールで使用ベース統計的テスト}
-\subsection{8.3.1 使用ベース統計的テストの場合}
-\begin{frame}[shrink=13]{使用ベース統計的テスト適用場合(p111)}
+\subsection{8.3.1 Usage-based統計的テストの場合}
+\begin{frame}[shrink=13]{Usage-based統計的テスト適用場合(p111)}
 \framesubtitle{The Cases for Usage-based Statistical Testing}
 \transwipe<2->
 
@@ -617,8 +630,8 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \begin{column}{0.6\textwidth}
 \only<4->{
 \begin{enumerate}
-\item 使用シナリオ, パターン, 関連する使用頻度を, 目標消費者やユーザーから収集
-\item 収集した情報を分析し, 操作プロフィール（OP, Operation Profile）に整理
+\item 使用シナリオ, パターン, 関連する使用頻度を, ターゲットとなる消費者やユーザーから収集
+\item 収集した情報を分析し, 操作プロフィール（OP, Operational Profile）に変換
 \item 操作プロフィールによってテストを行い
 \item テストの結果を分析し, 製品の信頼性を評価し, テストのフィードバックやソフトウェア開発プロセスに役立つ
     \begin{itemize}
@@ -651,7 +664,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.3.2 Musa操作プロフィール:基本的な考え方(Musa OP:Basic Ideas)}
-\begin{frame}[shrink=10]{MusaよるOPの定義(p112)}
+\begin{frame}[shrink=10]{MusaによるOPの定義(p112)}
 \framesubtitle{Musa OP:Basic Ideas(Defination)}
 \begin{definationfc}[操作プロフィール]
 操作プロフィールとは, 一連の操作とそれらの出現
@@ -662,8 +675,16 @@ and their associated probabilities of occurrence
 
 \flushright{---\cite{musa1993operational}}
 \end{definationfc}
-\bibliographystyle{IEEEtranN}
-\bibliography{chapter8}
+
+\begin{thebibliography}{Musa(1993)}
+
+\bibitem[Musa(1993)]{musa1993operational}
+J.~Musa, ``Operational profiles in software-reliability engineering,''
+  \emph{Software, IEEE}, vol.~10, no.~2, pp. 14--32, 1993.
+
+\end{thebibliography}
+
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -775,9 +796,9 @@ and their associated probabilities of occurrence
     \item もっと細かい要求分析と仕様が可能になる
     \item 顧客トレーニングを実行すべき項目を特定できる
     \end{itemize}
-\item<+-> 投資の高い収益率
+\item<+-> 高い収益率の投資
     \begin{itemize}
-    \item 線形に近いコストの成長率
+    \item コストの成長はソフトウェアの規模によって線形に近い
     \end{itemize}
     \note[item]{AT\&Tのデータによると, 普通の製品に対すOP開発コストは1人月}
     \note[item]{普通の定義は10万行, 10人の開発者で一年半}
@@ -816,11 +837,11 @@ and their associated probabilities of occurrence
     \item 新製品に既存のインストールがない
     \item 顧客のプライバシーに問題がある
     \end{itemize}
-\item 顧客を調査（survey）
+\item 顧客を調査
     \begin{itemize}
     \item 精度は専門家の意見より高い
     \end{itemize}
-\item 専門家の意見や既存の製品に基づいて使用量を予測
+\item 専門家の経験や既存の製品に基づいて使用量を予測
     \begin{itemize}
     \item コストは最も低い
     \end{itemize}
@@ -846,15 +867,15 @@ and their associated probabilities of occurrence
 \item 計画やマーケティング担当者
     \begin{itemize}
     \item 顧客との主要な接触
-    \item 顧客の懸念とその視点が再されていることを確認
+    \item 顧客の懸念とその視点が反映されていることを確認
     \end{itemize}
 \item システムエンジニア
     \begin{itemize}
-    \item 製品に実装される高レベルの機能を含む製品全体の要件と仕様
+    \item 製品に実装されるハイレベルの機能を含む製品全体の要件と仕様
     \end{itemize}
 \item ハイレベルデザイナー
     \begin{itemize}
-    \item 仕様に従う高レベルの製品設計を生成
+    \item 仕様に沿うハイレベルの製品設計をデザイン
     \end{itemize}
 \end{itemize}
 \end{column}
@@ -918,14 +939,14 @@ and their associated probabilities of occurrence
 \transwipe<2->[direction=180]
 
 
-\only<1>{ 1. 全種類の顧客を使用の要因に重み付けて, 顧客のプロフィールを探し}
+\only<1>{ 1. 全種類の顧客に重みを付けて, 顧客のプロフィールを探し}
 \only<2>{ 2. 一種の顧客の中関連するユーザーの型と彼らの相対使用率を定義し, 
     ユーザーのプロフィールを提示}
     \note<2>{顧客とユーザーの区別は, 顧客は製品を買う人, 
         ユーザーは製品を使う人}
-\only<3>{ 3. 通常に使用される操作とそれの重みを見つけ,システムモード
+\only<3>{ 3. よく使用される操作とそれの重みを見つけ,システムモード
     と関連プロフィールを定義}
-\only<4>{ 4. システムモードを分析し, 高レベルの機能とその関連するプロフィールを決定}
+\only<4>{ 4. システムモードを分析し, ハイレベルの機能とその関連するプロフィールを決定}
 \only<5>{ 5. 細かい機能の使用率を決定}
 
 \begin{columns}
@@ -1014,25 +1035,86 @@ and their associated probabilities of occurrence
 
 \pause
 \begin{enumerate}
-\item 操作のイニシエータ（initiator）を見付け
+\item 操作のイニシエータ（initiator）を決定
 \item 表現の形式を決定：\alert<3->{表か図か}
-\item 操作配列
-\item 発生率の測定形を決め：時間の単位
-\item 発生の可能性を決め
+\item 操作配列を決定
+\item 発生率の測定単位を決定
+\item 発生する可能性を決め
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{表現の形式：表(p120)}
-\framesubtitle{Representation: Tabular}
+\begin{frame}{Musa-2 表現の形式：表(p120)}
+\framesubtitle{Musa-2 Representation: Tabular}
 \begin{center}
 \includegraphics[width=0.8\textwidth,page=51]{figure/include.pdf}
 \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{表現の形式：図(p121)}
-\framesubtitle{Representation: Graphical}
+\begin{frame}{Musa-2 表現の形式：図(p121)}
+\framesubtitle{Musa-2 Representation: Graphical}
 \begin{center}
 \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{figure/graphical.png}
 \end{center}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{8.5 Case Study: 交換支援ソフトウェアに使うOP}
+\subsection{8.5.1 背景と参加者}
+\begin{frame}{交換支援システムの背景(p121)}
+\framesubtitle{Background for Cartridge Support System}
+Lockheed Martin戦術航空機(Tactical Aircraft)\note{航空機：こうくうき}
+会社(LMTAS)が開発した, 航空機要員に使われて, 任務の計画の媒介を交換するの
+支援システム(Cartridge Support Software, CSS)
+\begin{center}
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSS.png}
+\end{center}
+\note[item]{パイロットは媒介を使って、航空機に乗せているコンピューターに
+データをアップロードする。パソコンで任務の計画をロートできるという能力は
+タイロットにとって非常に大事、それがないと、パイロットは複雑なコントロール・パネル
+で必死に様々なデータを設定しなければならない。CSSを使ったら、パソコンをGUIから、
+パイロットは任務の計画を立つ操作は簡単に、効率的になる。}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{CSSのOPを開発する参加者(p122)}
+\framesubtitle{Participants in Developing OP of CSS}
+\note{
+操作プロフィール開発を導入した
+\begin{itemize}
+\item ユーザーの視点からCSSをもっと理解するために
+\item 高級機能を着目してテストするために
+\end{itemize}
+}
+
+参加者\cite{chruscielski1997operational}は
+\begin{itemize}
+\item Software Product Manager
+    \note[item]{SPM:責任はCSS製品の機能の計画して、売り出す。
+            SPMはユーザーの入力から、操作プロフィールへの
+            交流を指導者です。}
+\item Software Test Engineers
+    \note[item]{STE:責任は各操作ごとにテスト可能な入力状態を把握する。}
+\item System Engineers
+    \note[item]{SE:責任はシステムの要求やハイレベルの設計、
+        交付（こうふ）可能な機能等を提出し、テストに確認します}
+\end{itemize}
+
+\begin{thebibliography}{Chruscielski and Tian(1997)}
+\bibitem[Chruscielski and Tian(1997)]{chruscielski1997operational}
+K.~Chruscielski and J.~Tian, ``An operational profile for the cartridge support
+  software,'' in \emph{PROCEEDINGS The Eighth International Symposium On
+  Software Reliability Engineering}.\hskip 1em plus 0.5em minus 0.4em\relax
+  IEEE, 1997, pp. 203--212.
+\end{thebibliography}
+
+\note[item]{レポートを書いた二人はSMU(南メソジスト大学)に
+    「ソフトウェアテストと品質保証」を教える先生。}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\backupbegin
+\begin{frame}{Reference}
+
+\bibliographystyle{IEEEtranN}
+\bibliography{chapter8}
+\end{frame}
+\backupend
 \end{document}
