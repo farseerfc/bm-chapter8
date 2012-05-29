@@ -76,8 +76,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title[チェックリストと分割に基づく網羅と使用テスト]{
-チェックリストと分割に基づく 網羅と使用テスト\\
-{\small\scshape Coverage and Usage Testing Based on Checklists and Partitions}}
+チェックリストと分割に基づく\quad{}網羅と使用テスト\\
+{\small\scshape Coverage and Usage Testing\quad{}Based on Checklists and Partitions}}
 
 \subtitle[B4M1 輪講]{第8章 ($p107\sim p126$) B4M1 輪講}
 
@@ -126,7 +126,7 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{第8章の概要}
+\section{8.1 チェックリストに基づくテスト, とその制限}
 \subsection{概要}
 \begin{frame}{概要(p103)}
 
@@ -148,7 +148,6 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{8.1 チェックリストに基づくテスト, とその制限}
 \subsection{チェックリストに基づくテスト(Testing with Checklists)}
 
 \begin{frame}{Ad hocテスト と ランダムテスト(p104)}
@@ -277,7 +276,7 @@
 \begin{frame}{階層チェックリスト(p105)}
 \framesubtitle{Hierarchical Checklists }
 \begin{columns}
-    \begin{column}{0.35\textwidth}
+    \begin{column}{0.37\textwidth}
     \flushright{
     \begin{enumerate}
     \item ハイレベル項目1
@@ -286,10 +285,10 @@
     \end{enumerate}
     }
     \end{column}
-    \begin{column}{0.05\textwidth}
+    \begin{column}{0.04\textwidth}
     \Huge\[\Rightarrow\]
     \end{column}
-    \begin{column}{0.5\textwidth}
+    \begin{column}{0.49\textwidth}
     \begin{enumerate}
     \item ハイレベル項目1
         \begin{enumerate}
@@ -387,7 +386,10 @@
     \item 経験が必要
     \item 特殊な環境や設定等に依存
     \end{itemize}
-\item 大規模で, 複雑なシステムに, 相互接続と相互作用を定義するのも難しい 
+\item 相互接続と相互作用を定義するのも難しい 
+    \begin{itemize}
+    \item 特に大規模で, 複雑なシステムに
+    \end{itemize}
     \note[item]{相互接続:そうごせつぞく}
     \note[item]{相互作用:そうごさよう}
 \end{itemize}
@@ -435,9 +437,8 @@
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{8.2.1 動機の事例(Some Motivational Examples)}
-\begin{frame}{動機の事例(p107)}
-\framesubtitle{Some Motivational Examples}
+\subsection{8.2.1 Some Motivational Examples}
+\begin{frame}{Some Motivational Examples(p107)}
 \mode<article>{\renewcommand{\imageheight}{0.15\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.35\textheight}}
 %\transfade<2->[duration=0.5]
@@ -466,7 +467,7 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.2.2 分割：概念と定義（Partition: Concepts and Definitions）}
-\begin{frame}[shrink=10]{分割：概念と定義(p108)}
+\begin{frame}{分割：概念と定義(p108)}
 \framesubtitle{Partition: Concepts and Definitions}
 \begin{columns}
 \begin{column}{0.5\textwidth}
@@ -649,8 +650,8 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.7\textheight}}
 \pgfdeclareimage[height=\imageheight]{vmodel}{figure/V-model.JPG}
-\pgfdeclareimage[height=\imageheight]{vmodel-common}{figure/V-model-common.png}
-\pgfdeclareimage[height=\imageheight]{vmodel-op}{figure/V-model-OP.png}
+\pgfdeclareimage[height=\imageheight]{vmodel-common}{figure/V-model-common.pdf}
+\pgfdeclareimage[height=\imageheight]{vmodel-op}{figure/V-model-OP.pdf}
 \begin{figure}
 \begin{center}
 \begin{overprint}
@@ -887,49 +888,12 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \framesubtitle{OP development procedure: Musa-1}
 \begin{definationfc}[Musa-1]
 トップダウン手法, 同じ重要なユーザーグループに対して多数の操作プロフィール
+
+In Musa’s top-down approach or Musa-1 procedure,
+one OP is developed for each homogeneous group of users or operations 
+\flushright{---\cite{musa1993operational}}
 \end{definationfc}
 
-\begin{columns}
-\begin{column}{0.1\textwidth}
-\begin{center}
-\mode<article>{\renewcommand{\imageheight}{0.07\textheight}}
-\mode<presentation>{\renewcommand{\imageheight}{0.1\textheight}}
-\includegraphics[height=\imageheight]{figure/goverment.png}
-
-\includegraphics[height=\imageheight]{figure/corporate.jpg}
-
-\includegraphics[height=\imageheight]{figure/education.jpg}
-\end{center}
-\end{column}
-
-\mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
-\mode<presentation>{\renewcommand{\imageheight}{0.3\textheight}}
-
-\begin{column}{0.23\textwidth}
-\begin{center}
-\includegraphics[height=\imageheight]{figure/orgchart.jpg}
-\end{center}
-\end{column}
-
-\begin{column}{0.2\textwidth}
-\begin{center}
-\includegraphics[height=\imageheight]{figure/shifter.jpg}
-\end{center}
-\end{column}
-
-\begin{column}{0.23\textwidth}
-\begin{center}
-\includegraphics[height=\imageheight]{figure/operations.jpg}
-\end{center}
-\end{column}
-
-\begin{column}{0.23\textwidth}
-\begin{center}
-\includegraphics[height=\imageheight]{figure/function.png}
-\end{center}
-\end{column}
-
-\end{columns}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1025,12 +989,13 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.4.3 Musa-2操作プロフィールの開発過程}
-\begin{frame}{Musa-2 OPの開発過程(p120)}
+\begin{frame}[shrink=5]{Musa-2 OPの開発過程(p120)}
 \framesubtitle{OP development procedure: Musa-2}
 \begin{definationfc}[Musa-2]
-一つユーザーに対して単一な操作プロフィール
+一つユーザー型に対して単一な操作プロフィール, もっと小さいデータソースに適用
 
-もっと小さいデータソースに適用
+for smaller products or ones with more homogeneous user population, 
+one profile would probably be enough
 \end{definationfc}
 
 \pause
@@ -1065,18 +1030,10 @@ Lockheed Martin戦術航空機(Tactical Aircraft)\note{航空機：こうくう�
 会社(LMTAS)が開発した, 航空機要員に使われて, 任務の計画の媒介を交換するの
 支援システム(Cartridge Support Software, CSS)
 
-\begin{columns}
-\begin{column}{0.6\textwidth}
 \begin{center}
-\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSS.png}
+\includegraphics[width=0.6\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSS.png}
+\includegraphics[width=0.4\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSSdialog.png}
 \end{center}
-\end{column}
-\begin{column}{0.4\textwidth}
-\begin{center}
-\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{figure/CSSdialog.png}
-\end{center}
-\end{column}
-\end{columns}
 
 \note[item]{航空機要員は媒介を使って、航空機に乗せているコンピューターに
 データをアップロードする。航空機要員で任務の計画をロートできるという能力は
@@ -1231,7 +1188,11 @@ CSSに見つけたシステム・モードは三種類に分かれています�
     \begin{itemize}
     \item 既存のCSSの機能設計は役に立った
     \end{itemize}
-\item System Engineers と Test Engineers の経験から、ユーザー調査書を作った
+\item ユーザー調査書を作った
+    \begin{itemize}
+    \item System Engineers と Test Engineers の経験から
+    \item 二週間で
+    \end{itemize}
 \item メールでのユーザー調査
 \item 結果操作プロフィールの解釈
     \begin{itemize}

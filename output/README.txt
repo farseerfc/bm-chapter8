@@ -4,10 +4,12 @@ pdfは全部こんな形て名付けています：
 chapter8.{mode}.{aspect}.pdf
 
 modeは：
-beamer: プロジェクター用。アニメション（overlay, transition）と目次を含む。
-trans: アニメションがない。ページ数とbeamerは一緒。
+beamer: プロジェクター用。アニメション（overlay,transition）と目次を含む。
+    アニメションはfullscreenモードに見えます。Adobe ReaderだとCtrl+Lで
+    開けます。
+trans: アニメションがない。ページ数はbeamerと同じ。
 handout: 印刷用。アニメションと目次がない。
-notes: 印刷用。handoutを元、ノートを含む。
+notes: 印刷用。handoutを元に、さらにノートを含む。
 article: 印刷用。A4紙サイズ。
 
 aspectはモニターの解析度：
