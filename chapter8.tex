@@ -148,7 +148,7 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{チェックリストに基づくテスト(Testing with Checklists)}
+\subsection{チェックリストに基づくテスト}
 
 \begin{frame}{Ad hocテスト と ランダムテスト(p104)}
 \framesubtitle{Ad hoc Testing \& Random Testing}
@@ -222,7 +222,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[shrink=15]{チェックリストに基づくテスト(p104)}
+\begin{frame}[shrink=20]{チェックリストに基づくテスト(p104)}
 \framesubtitle{Testing　with checklists}
 \transfade<2>[duration=0.5]
 \mode<article>{\renewcommand{\imageheight}{0.2\textheight}}
@@ -238,21 +238,21 @@
         \item 機能チェックリスト
             \begin{itemize}
             \item システム全体からハイレベルの機能
-            \item ローレベルの字句, 独立な部品
+            \item ローレベルで独立な部品
             \end{itemize}
         \end{itemize}
     \item ホワイトボックステスト(WBT)
         \begin{itemize}
         \item プログラムの特徴
-        \item コーディング標準
-        \item 単体テストの文の網羅
+        \item コーディング標準(Coding Standard)
+        \item 単体テストのコードの網羅
         \item 統合テストとシステムテストの部品の網羅
-        \item 構造と特徴など, 実装に関しるチェックリスト
-            \begin{itemize}
-            \item 関数の呼び出し規則
-            \item 資源の生産者と消費者
-            \item モジュール間に共有するデータ
-            \end{itemize}
+    \end{itemize}
+    \item 構造と特徴など, 実装に関しるチェックリスト
+        \begin{itemize}
+        \item 関数の呼び出し規則
+        \item 資源の生産者と消費者
+        \item モジュール間に共有するデータ
         \end{itemize}
     \end{itemize}
     \end{column}
@@ -272,7 +272,7 @@
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{階層及び複合チェックリスト(Hierarchical and Combined Checklists)}
+\subsection{階層及び複合チェックリスト}
 \begin{frame}{階層チェックリスト(p105)}
 \framesubtitle{Hierarchical Checklists }
 \begin{columns}
@@ -372,7 +372,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{チェックリストの問題点と制限（Problems and Limits of Checklists）}
+\subsection{チェックリストの問題点と制限}
 \begin{frame}{チェックリストの問題点(p106)}
 \framesubtitle{Problems General Checklists}
 
@@ -420,7 +420,7 @@
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.2 分割カバレッジテスト（Testing for Partition Coverage）}
+\section{8.2 分割カバレッジテスト}
 \subsection{紹介}
 \begin{frame}{分割カバレッジテスト(p107)}
 \framesubtitle{Testing for Partition Coverage}
@@ -438,7 +438,7 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{8.2.1 Some Motivational Examples}
-\begin{frame}{Some Motivational Examples(p107)}
+\begin{frame}{Motivational Examples(p107)}
 \mode<article>{\renewcommand{\imageheight}{0.15\textheight}}
 \mode<presentation>{\renewcommand{\imageheight}{0.35\textheight}}
 %\transfade<2->[duration=0.5]
@@ -466,7 +466,7 @@
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{8.2.2 分割：概念と定義（Partition: Concepts and Definitions）}
+\subsection{8.2.2 分割：概念と定義}
 \begin{frame}{分割：概念と定義(p108)}
 \framesubtitle{Partition: Concepts and Definitions}
 \begin{columns}
@@ -605,7 +605,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{8.3 Musa氏の操作プロフィールで使用ベース統計的テスト}
 \subsection{8.3.1 Usage-based統計的テストの場合}
-\begin{frame}[shrink=13]{Usage-based統計的テスト適用場合(p111)}
+\begin{frame}[shrink=13]{統計的UBT適用する場合(p111)}
 \framesubtitle{The Cases for Usage-based Statistical Testing}
 \transwipe<2->
 
@@ -664,7 +664,7 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{8.3.2 Musa操作プロフィール:基本的な考え方(Musa OP:Basic Ideas)}
+\subsection{8.3.2 Musa操作プロフィール:基本的な考え方}
 \begin{frame}[shrink=10]{MusaによるOPの定義(p112)}
 \framesubtitle{Musa OP:Basic Ideas(Defination)}
 \begin{definationfc}[操作プロフィール]
@@ -716,7 +716,10 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \end{figure}
 \end{column}
 \end{columns}
-
+\note[item]{SME/SEAS School of Engineering and Applied Science of Southern
+    Methodist University}
+\note[item]{一つのwebpageを一つのプロフィールにする必要はない。何万がある。
+    HTMLとかhtmとか色々あります。}
 \note[item]{使用確率によってsortする必要は限られていない}
 \note[item]{使用確率のプロフィールが均一（きんいつ）とは限られていない}
 \note[item]{均一（きんいつ）とは限られていないから, 閾値を決めてフィルタリングすることが可能}
@@ -751,7 +754,7 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \begin{frame}{操作プロフィールで\alert{進捗}テスト(p114)}
 \framesubtitle{Using OPs for Progressive Testing}
 \transfade<2->[duration=0.1]
-\animate<2-7>
+%\animate<2-7>
 \begin{center}
 \mode<article>{\def\tikzy{0.04cm}\def\tikzx{0.6cm}}
 \mode<presentation>{\def\tikzy{0.06cm}\def\tikzx{1cm}}
@@ -806,7 +809,7 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.4 操作プロフィールを作成(Constructing Operational Profiles)}
+\section{8.4 操作プロフィールを作成}
 \subsection{8.4.1 一般的な方法と参加者}
 \begin{frame}{単一OP？多数OP？(p115)}
 \framesubtitle{Single Operational Profiles? Multiple Operational Profiles?}
@@ -1001,9 +1004,12 @@ one profile would probably be enough
 \pause
 \begin{enumerate}
 \item 操作のイニシエータ（initiator）を決定
+\note[item]{initiator：人間のユーザーでもあり、software, hardware, 
+    networkどかでも可能。dataのsource、操作の元}
 \item 表現の形式を決定：\alert<3->{表か図か}
 \item 操作配列を決定
 \item 発生率の測定単位を決定
+\note[item]{測定単位：月に、時間、秒}
 \item 発生する可能性を決め
 \end{enumerate}
 \end{frame}
@@ -1020,11 +1026,15 @@ one profile would probably be enough
 \begin{center}
 \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{figure/graphical.png}
 \end{center}
+\note[item]{Stage1: Browserを開くには、default starting page, customized
+    starting page}
+\note[item]{Stage2: Following links in visited page, bookmarked pages, mixture}
+\note[item]{表との区別}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.5 Case Study: 交換支援ソフトウェアに使うOP}
+\section{8.5 Case Study: 交換支援ソフトウェアに使う操作プロフィール}
 \subsection{8.5.1 背景と参加者}
-\begin{frame}{交換支援システムの背景(p121)}
+\begin{frame}{交換支援システムCSSの背景(p121)}
 \framesubtitle{Background for Cartridge Support System}
 Lockheed Martin戦術航空機(Tactical Aircraft)\note{航空機：こうくうき}
 会社(LMTAS)が開発した, 航空機要員に使われて, 任務の計画の媒介を交換するの
@@ -1240,8 +1250,8 @@ CSSに見つけたシステム・モードは三種類に分かれています�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \backupbegin
-\begin{frame}{Reference}
-
+\begin{frame}{参考文献}
+\framesubtitle{Reference}
 \bibliographystyle{IEEEtranN}
 \bibliography{chapter8}
 \end{frame}
