@@ -153,14 +153,12 @@
 \begin{frame}{Ad hocテスト と ランダムテスト(p104)}
 \framesubtitle{Ad hoc Testing \& Random Testing}
 
-
 \pgfdeclareimage[height=\imageheight]{Ad-Hoc-Testing}{figure/Ad-Hoc-Testing.jpg}
 \pgfdeclareimage[height=\imageheight]{Random-Testing}{figure/Random-Testing.jpg}
 
 \transwipe[direction=0]<2>
 \transwipe[direction=180]<3>
 
-%\mode<presentation>{
 \begin{columns}[t]
 \begin{column}{.5\textwidth}
 \only<1,3>{
@@ -170,7 +168,6 @@
 \caption{Ad hot Testing}
 \end{center}
 \end{figure}
-
 }
 
 \end{column}
@@ -193,30 +190,7 @@
 \onslide<3|handout:1|trans:1|article:1> 繰り返してAd hocテストを実行する時,
     テスト者は行ったテストを追跡すると, チェックリストテストになる
 \end{overprint}
-%}
 
-%\mode<article>{
-%図~\ref{fig:adhoc}ソフトウェアを\alert{勝手に}実行してその結果を観察
-%
-%図~\ref{fig:random} \alert{統計的}にランダムのプロフィールでテストの操作を行い
-%
-%繰り返してAd hocテストを実行する時, 試験者は行ったテストを追跡すると, チェックリストテストになった
-%
-%\begin{figure}
-%\begin{center}
-%\label{fig:adhoc}
-%\pgfuseimage{Ad-Hoc-Testing}
-%\caption{Ad Hot Testing}
-%\end{center}
-%\end{figure}
-%\begin{figure}
-%\begin{center}
-%\label{fig:random}
-%\pgfuseimage{Random-Testing}
-%\caption{Random Testing}
-%\end{center}
-%\end{figure}
-%}
 
 \end{frame}
 
@@ -615,14 +589,14 @@ if(@\only<1|handout:0|trans:0|article:0>{@最初決定@}\only<2|handout:1|trans:
 \hline
   操作   & \uncover<2->{頻度(\%)} & \\
 \hline
-スブドメイン1 &                      & \\
+サブドメイン1 &                      & \\
 -操作1   & \uncover<2->{ 1\% }  & \\
 -操作2   & \uncover<2->{72\% }  & \uncover<3->{$\checkmark$} \\
 -操作3   & \uncover<2->{ 2\% }  & \\
-スブドメイン2 &                      & \\
+サブドメイン2 &                      & \\
 -操作4   & \uncover<2->{13\% }  & \uncover<3->{$\checkmark$} \\
 -操作5   & \uncover<2->{ 2\% }  & \\
-スブドメイン3 &                      & \\
+サブドメイン3 &                      & \\
 -操作6   & \uncover<2->{ 3\% }  & \\
 -操作7   & \uncover<2->{ 7\% }  & \uncover<3->{$\checkmark$} \\
 \hline
@@ -736,14 +710,14 @@ J.~Musa, ``Operational profiles in software-reliability engineering,''
 \hline
   操作   & \uncover<2->{頻度(\%)} & \uncover<3->{テスト数(合計30)}\\
 \hline
-スブドメイン1 &                      & \\
+サブドメイン1 &                      & \\
 -操作1   & \uncover<2->{ 1\% }  & \uncover<3->{0}  \\
 -操作2   & \uncover<2->{72\% }  & \uncover<3->{23} \\
 -操作3   & \uncover<2->{ 2\% }  & \uncover<3->{0} \\
-スブドメイン2 &                      & \\
+サブドメイン2 &                      & \\
 -操作4   & \uncover<2->{13\% }  & \uncover<3->{4} \\
 -操作5   & \uncover<2->{ 2\% }  & \uncover<3->{0} \\
-スブドメイン3 &                      & \\
+サブドメイン3 &                      & \\
 -操作6   & \uncover<2->{ 3\% }  & \uncover<3->{1} \\
 -操作7   & \uncover<2->{ 7\% }  & \uncover<3->{2} \\
 \hline
@@ -1227,9 +1201,9 @@ CSSに見つけたシステム・モードは三種類に分かれています�
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{8.6 まどめ}
-\subsection{8.6 まどめ}
-\begin{frame}{まどめ(p125)}
+\section{8.6 まとめ}
+\subsection{8.6 まとめ}
+\begin{frame}{まとめ(p125)}
 \framesubtitle{Concluding Remarks}
 \begin{enumerate}
 \item チェックリスト・テスト, とそれの制限を紹介した
